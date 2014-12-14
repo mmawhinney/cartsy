@@ -1,6 +1,6 @@
 Cartsy
 ======
-## Huh?
+## What?
 Cartsy is an app that allows quick management of what's in the fridge and what's on the shopping list. 
 Sync with other members of the household, barcode scanning and ???
 
