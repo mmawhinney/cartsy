@@ -5,7 +5,11 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
+<<<<<<< HEAD
 	<string>A0870AB0-2896-4421-A6BD-F93F81CFE31C</string>
+=======
+	<string>CB353B5B-AC4A-4800-81BD-F75C305F5BBD</string>
+>>>>>>> e55374096dcb388f192014bfc32c573da1d85a37
 	<key>IDESourceControlProjectName</key>
 	<string>cartsy</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
