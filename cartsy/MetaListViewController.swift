@@ -2,7 +2,7 @@
 //  MetaListsViewController.swift
 //  cartsy
 //
-//  Created by Matheson Mawhinney on 2014-12-13.
+//  Created by Matheson Mawhinney and Alex Popov on 2014-12-13.
 //  Copyright (c) 2014 numbits. All rights reserved.
 //
 
@@ -40,6 +40,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.textLabel?.text = rowData
         return cell
     }
+    
 
     
     
