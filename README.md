@@ -7,6 +7,7 @@ Sync with other members of the household, barcode scanning and ???
 ## TODO Short-term
 
 ### MetaList
+* consult Diet Dict for this code, we've already done this!
 * query db for list of lists
 * populate TableView from that list
 * have identifiers to track which list is related to which index
