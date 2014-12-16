@@ -42,7 +42,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        NSLog("Did select row at index path \(indexPath)")
+        println("Did select row at index path \(indexPath)")
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let groceryList = self.storyboard?.instantiateViewControllerWithIdentifier("MainList")! as GroceryListViewController // perhaps try cleaning this line.
         self.navigationController?.pushViewController(groceryList, animated: true)
