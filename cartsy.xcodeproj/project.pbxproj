@@ -13,6 +13,7 @@
 		4CC507621A3D100B006D1752 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC507601A3D100B006D1752 /* LaunchScreen.xib */; };
 		4CC5076E1A3D100B006D1752 /* cartsyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC5076D1A3D100B006D1752 /* cartsyTests.swift */; };
 		4CC507781A3D1FD1006D1752 /* MetaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC507771A3D1FD1006D1752 /* MetaListViewController.swift */; };
+		B0E1BC2F1A3FD18900475462 /* GroceryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E1BC2E1A3FD18900475462 /* GroceryListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		4CC5076C1A3D100B006D1752 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CC5076D1A3D100B006D1752 /* cartsyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cartsyTests.swift; sourceTree = "<group>"; };
 		4CC507771A3D1FD1006D1752 /* MetaListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetaListViewController.swift; sourceTree = "<group>"; };
+		B0E1BC2E1A3FD18900475462 /* GroceryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +81,7 @@
 			children = (
 				4C12EBBF1A3D443900DF2FD0 /* Main.storyboard */,
 				4CC507571A3D100B006D1752 /* AppDelegate.swift */,
-				4CC507771A3D1FD1006D1752 /* MetaListViewController.swift */,
+				B0E1BC301A3FD19300475462 /* ViewControllers */,
 				4CC5075E1A3D100B006D1752 /* Images.xcassets */,
 				4CC507601A3D100B006D1752 /* LaunchScreen.xib */,
 				4CC507551A3D100B006D1752 /* Supporting Files */,
@@ -110,6 +112,15 @@
 				4CC5076C1A3D100B006D1752 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B0E1BC301A3FD19300475462 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4CC507771A3D1FD1006D1752 /* MetaListViewController.swift */,
+				B0E1BC2E1A3FD18900475462 /* GroceryListViewController.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +225,7 @@
 			files = (
 				4CC507781A3D1FD1006D1752 /* MetaListViewController.swift in Sources */,
 				4CC507581A3D100B006D1752 /* AppDelegate.swift in Sources */,
+				B0E1BC2F1A3FD18900475462 /* GroceryListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

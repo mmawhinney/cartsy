@@ -41,6 +41,12 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        NSLog("Did select row at index path \(indexPath)")
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        let groceryList: GroceryListViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainList")! as GroceryListViewController
+        self.navigationController?.pushViewController(groceryList, animated: true)
+    }
 
     
     
