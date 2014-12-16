@@ -40,6 +40,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.textLabel?.text = rowData
         return cell
     }
+    
 
     
     
