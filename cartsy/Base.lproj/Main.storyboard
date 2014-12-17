@@ -32,6 +32,7 @@
                     <navigationItem key="navigationItem" id="A26-Yg-A7t"/>
                     <connections>
                         <outlet property="metaListTable" destination="6da-9s-CjT" id="1Eh-U3-XhF"/>
+                        <segue destination="MCw-5L-ag0" kind="push" id="ai0-2P-3s6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0mR-35-aSd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -51,6 +52,7 @@
                             <outlet property="delegate" destination="MCw-5L-ag0" id="mA9-of-9bj"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="uOi-vb-2ld"/>
                     <connections>
                         <outlet property="groceryListTable" destination="Vwo-8m-p2z" id="MBt-J1-SWn"/>
                     </connections>
