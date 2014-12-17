@@ -52,7 +52,13 @@
                             <outlet property="delegate" destination="MCw-5L-ag0" id="mA9-of-9bj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="uOi-vb-2ld"/>
+                    <navigationItem key="navigationItem" id="uOi-vb-2ld">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="J78-Tz-SMu">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="MCw-5L-ag0" id="0Ia-ar-XgF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="groceryListTable" destination="Vwo-8m-p2z" id="MBt-J1-SWn"/>
                     </connections>

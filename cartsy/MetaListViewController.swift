@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import CoreData
+
 
 class MetaListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
