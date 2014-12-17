@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4CC507511A3D100B006D1752"
+               BlueprintIdentifier = "4CE108171A4116770044794F"
                BuildableName = "cartsy.app"
                BlueprintName = "cartsy"
                ReferencedContainer = "container:cartsy.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4CC507661A3D100B006D1752"
+               BlueprintIdentifier = "4CE1082F1A4116770044794F"
                BuildableName = "cartsyTests.xctest"
                BlueprintName = "cartsyTests"
                ReferencedContainer = "container:cartsy.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4CC507661A3D100B006D1752"
+               BlueprintIdentifier = "4CE1082F1A4116770044794F"
                BuildableName = "cartsyTests.xctest"
                BlueprintName = "cartsyTests"
                ReferencedContainer = "container:cartsy.xcodeproj">
@@ -56,7 +56,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4CC507511A3D100B006D1752"
+            BlueprintIdentifier = "4CE108171A4116770044794F"
             BuildableName = "cartsy.app"
             BlueprintName = "cartsy"
             ReferencedContainer = "container:cartsy.xcodeproj">
@@ -76,7 +76,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4CC507511A3D100B006D1752"
+            BlueprintIdentifier = "4CE108171A4116770044794F"
             BuildableName = "cartsy.app"
             BlueprintName = "cartsy"
             ReferencedContainer = "container:cartsy.xcodeproj">
@@ -95,7 +95,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4CC507511A3D100B006D1752"
+            BlueprintIdentifier = "4CE108171A4116770044794F"
             BuildableName = "cartsy.app"
             BlueprintName = "cartsy"
             ReferencedContainer = "container:cartsy.xcodeproj">

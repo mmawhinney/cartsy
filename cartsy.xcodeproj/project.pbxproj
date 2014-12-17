@@ -7,48 +7,50 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C12EBC01A3D443900DF2FD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C12EBBF1A3D443900DF2FD0 /* Main.storyboard */; };
-		4CC507581A3D100B006D1752 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC507571A3D100B006D1752 /* AppDelegate.swift */; };
-		4CC5075F1A3D100B006D1752 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CC5075E1A3D100B006D1752 /* Images.xcassets */; };
-		4CC507621A3D100B006D1752 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC507601A3D100B006D1752 /* LaunchScreen.xib */; };
-		4CC5076E1A3D100B006D1752 /* cartsyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC5076D1A3D100B006D1752 /* cartsyTests.swift */; };
-		4CC507781A3D1FD1006D1752 /* MetaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC507771A3D1FD1006D1752 /* MetaListViewController.swift */; };
-		B0E1BC2F1A3FD18900475462 /* GroceryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E1BC2E1A3FD18900475462 /* GroceryListViewController.swift */; };
+		4CE1081E1A4116770044794F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE1081D1A4116770044794F /* AppDelegate.swift */; };
+		4CE108211A4116770044794F /* cartsy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CE1081F1A4116770044794F /* cartsy.xcdatamodeld */; };
+		4CE108261A4116770044794F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CE108241A4116770044794F /* Main.storyboard */; };
+		4CE108281A4116770044794F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CE108271A4116770044794F /* Images.xcassets */; };
+		4CE1082B1A4116770044794F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE108291A4116770044794F /* LaunchScreen.xib */; };
+		4CE108371A4116770044794F /* cartsyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE108361A4116770044794F /* cartsyTests.swift */; };
+		4CE108411A4116CF0044794F /* MetaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE108401A4116CF0044794F /* MetaListViewController.swift */; };
+		4CE108431A4116E90044794F /* GroceryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE108421A4116E90044794F /* GroceryListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4CC507681A3D100B006D1752 /* PBXContainerItemProxy */ = {
+		4CE108311A4116770044794F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4CC5074A1A3D100B006D1752 /* Project object */;
+			containerPortal = 4CE108101A4116770044794F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4CC507511A3D100B006D1752;
+			remoteGlobalIDString = 4CE108171A4116770044794F;
 			remoteInfo = cartsy;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4C12EBBF1A3D443900DF2FD0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		4CC507521A3D100B006D1752 /* cartsy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cartsy.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4CC507561A3D100B006D1752 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4CC507571A3D100B006D1752 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4CC5075E1A3D100B006D1752 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		4CC507611A3D100B006D1752 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		4CC507671A3D100B006D1752 /* cartsyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cartsyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4CC5076C1A3D100B006D1752 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4CC5076D1A3D100B006D1752 /* cartsyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cartsyTests.swift; sourceTree = "<group>"; };
-		4CC507771A3D1FD1006D1752 /* MetaListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetaListViewController.swift; sourceTree = "<group>"; };
-		B0E1BC2E1A3FD18900475462 /* GroceryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListViewController.swift; sourceTree = "<group>"; };
+		4CE108181A4116770044794F /* cartsy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cartsy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CE1081C1A4116770044794F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CE1081D1A4116770044794F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4CE108201A4116770044794F /* cartsy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = cartsy.xcdatamodel; sourceTree = "<group>"; };
+		4CE108251A4116770044794F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4CE108271A4116770044794F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4CE1082A1A4116770044794F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		4CE108301A4116770044794F /* cartsyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cartsyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CE108351A4116770044794F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CE108361A4116770044794F /* cartsyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cartsyTests.swift; sourceTree = "<group>"; };
+		4CE108401A4116CF0044794F /* MetaListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetaListViewController.swift; sourceTree = "<group>"; };
+		4CE108421A4116E90044794F /* GroceryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4CC5074F1A3D100B006D1752 /* Frameworks */ = {
+		4CE108151A4116770044794F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4CC507641A3D100B006D1752 /* Frameworks */ = {
+		4CE1082D1A4116770044794F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -58,67 +60,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4CC507491A3D100B006D1752 = {
+		4CE1080F1A4116770044794F = {
 			isa = PBXGroup;
 			children = (
-				4CC507541A3D100B006D1752 /* cartsy */,
-				4CC5076A1A3D100B006D1752 /* cartsyTests */,
-				4CC507531A3D100B006D1752 /* Products */,
+				4CE1081A1A4116770044794F /* cartsy */,
+				4CE108331A4116770044794F /* cartsyTests */,
+				4CE108191A4116770044794F /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		4CC507531A3D100B006D1752 /* Products */ = {
+		4CE108191A4116770044794F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4CC507521A3D100B006D1752 /* cartsy.app */,
-				4CC507671A3D100B006D1752 /* cartsyTests.xctest */,
+				4CE108181A4116770044794F /* cartsy.app */,
+				4CE108301A4116770044794F /* cartsyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4CC507541A3D100B006D1752 /* cartsy */ = {
+		4CE1081A1A4116770044794F /* cartsy */ = {
 			isa = PBXGroup;
 			children = (
-				4C12EBBF1A3D443900DF2FD0 /* Main.storyboard */,
-				4CC507571A3D100B006D1752 /* AppDelegate.swift */,
-				B0E1BC301A3FD19300475462 /* ViewControllers */,
-				4CC5075E1A3D100B006D1752 /* Images.xcassets */,
-				4CC507601A3D100B006D1752 /* LaunchScreen.xib */,
-				4CC507551A3D100B006D1752 /* Supporting Files */,
+				4CE1081D1A4116770044794F /* AppDelegate.swift */,
+				4CE108241A4116770044794F /* Main.storyboard */,
+				4CE108271A4116770044794F /* Images.xcassets */,
+				4CE108291A4116770044794F /* LaunchScreen.xib */,
+				4CE1081F1A4116770044794F /* cartsy.xcdatamodeld */,
+				4CE1081B1A4116770044794F /* Supporting Files */,
+				4CE108441A4116FC0044794F /* ViewControllers */,
 			);
 			path = cartsy;
 			sourceTree = "<group>";
 		};
-		4CC507551A3D100B006D1752 /* Supporting Files */ = {
+		4CE1081B1A4116770044794F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4CC507561A3D100B006D1752 /* Info.plist */,
+				4CE1081C1A4116770044794F /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		4CC5076A1A3D100B006D1752 /* cartsyTests */ = {
+		4CE108331A4116770044794F /* cartsyTests */ = {
 			isa = PBXGroup;
 			children = (
-				4CC5076D1A3D100B006D1752 /* cartsyTests.swift */,
-				4CC5076B1A3D100B006D1752 /* Supporting Files */,
+				4CE108361A4116770044794F /* cartsyTests.swift */,
+				4CE108341A4116770044794F /* Supporting Files */,
 			);
 			path = cartsyTests;
 			sourceTree = "<group>";
 		};
-		4CC5076B1A3D100B006D1752 /* Supporting Files */ = {
+		4CE108341A4116770044794F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4CC5076C1A3D100B006D1752 /* Info.plist */,
+				4CE108351A4116770044794F /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B0E1BC301A3FD19300475462 /* ViewControllers */ = {
+		4CE108441A4116FC0044794F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				4CC507771A3D1FD1006D1752 /* MetaListViewController.swift */,
-				B0E1BC2E1A3FD18900475462 /* GroceryListViewController.swift */,
+				4CE108401A4116CF0044794F /* MetaListViewController.swift */,
+				4CE108421A4116E90044794F /* GroceryListViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -126,13 +129,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4CC507511A3D100B006D1752 /* cartsy */ = {
+		4CE108171A4116770044794F /* cartsy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4CC507711A3D100B006D1752 /* Build configuration list for PBXNativeTarget "cartsy" */;
+			buildConfigurationList = 4CE1083A1A4116770044794F /* Build configuration list for PBXNativeTarget "cartsy" */;
 			buildPhases = (
-				4CC5074E1A3D100B006D1752 /* Sources */,
-				4CC5074F1A3D100B006D1752 /* Frameworks */,
-				4CC507501A3D100B006D1752 /* Resources */,
+				4CE108141A4116770044794F /* Sources */,
+				4CE108151A4116770044794F /* Frameworks */,
+				4CE108161A4116770044794F /* Resources */,
 			);
 			buildRules = (
 			);
@@ -140,46 +143,46 @@
 			);
 			name = cartsy;
 			productName = cartsy;
-			productReference = 4CC507521A3D100B006D1752 /* cartsy.app */;
+			productReference = 4CE108181A4116770044794F /* cartsy.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4CC507661A3D100B006D1752 /* cartsyTests */ = {
+		4CE1082F1A4116770044794F /* cartsyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4CC507741A3D100B006D1752 /* Build configuration list for PBXNativeTarget "cartsyTests" */;
+			buildConfigurationList = 4CE1083D1A4116770044794F /* Build configuration list for PBXNativeTarget "cartsyTests" */;
 			buildPhases = (
-				4CC507631A3D100B006D1752 /* Sources */,
-				4CC507641A3D100B006D1752 /* Frameworks */,
-				4CC507651A3D100B006D1752 /* Resources */,
+				4CE1082C1A4116770044794F /* Sources */,
+				4CE1082D1A4116770044794F /* Frameworks */,
+				4CE1082E1A4116770044794F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4CC507691A3D100B006D1752 /* PBXTargetDependency */,
+				4CE108321A4116770044794F /* PBXTargetDependency */,
 			);
 			name = cartsyTests;
 			productName = cartsyTests;
-			productReference = 4CC507671A3D100B006D1752 /* cartsyTests.xctest */;
+			productReference = 4CE108301A4116770044794F /* cartsyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		4CC5074A1A3D100B006D1752 /* Project object */ = {
+		4CE108101A4116770044794F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = numbits;
 				TargetAttributes = {
-					4CC507511A3D100B006D1752 = {
+					4CE108171A4116770044794F = {
 						CreatedOnToolsVersion = 6.2;
 					};
-					4CC507661A3D100B006D1752 = {
+					4CE1082F1A4116770044794F = {
 						CreatedOnToolsVersion = 6.2;
-						TestTargetID = 4CC507511A3D100B006D1752;
+						TestTargetID = 4CE108171A4116770044794F;
 					};
 				};
 			};
-			buildConfigurationList = 4CC5074D1A3D100B006D1752 /* Build configuration list for PBXProject "cartsy" */;
+			buildConfigurationList = 4CE108131A4116770044794F /* Build configuration list for PBXProject "cartsy" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -187,29 +190,29 @@
 				en,
 				Base,
 			);
-			mainGroup = 4CC507491A3D100B006D1752;
-			productRefGroup = 4CC507531A3D100B006D1752 /* Products */;
+			mainGroup = 4CE1080F1A4116770044794F;
+			productRefGroup = 4CE108191A4116770044794F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4CC507511A3D100B006D1752 /* cartsy */,
-				4CC507661A3D100B006D1752 /* cartsyTests */,
+				4CE108171A4116770044794F /* cartsy */,
+				4CE1082F1A4116770044794F /* cartsyTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4CC507501A3D100B006D1752 /* Resources */ = {
+		4CE108161A4116770044794F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C12EBC01A3D443900DF2FD0 /* Main.storyboard in Resources */,
-				4CC507621A3D100B006D1752 /* LaunchScreen.xib in Resources */,
-				4CC5075F1A3D100B006D1752 /* Images.xcassets in Resources */,
+				4CE108261A4116770044794F /* Main.storyboard in Resources */,
+				4CE1082B1A4116770044794F /* LaunchScreen.xib in Resources */,
+				4CE108281A4116770044794F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4CC507651A3D100B006D1752 /* Resources */ = {
+		4CE1082E1A4116770044794F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -219,39 +222,48 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4CC5074E1A3D100B006D1752 /* Sources */ = {
+		4CE108141A4116770044794F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CC507781A3D1FD1006D1752 /* MetaListViewController.swift in Sources */,
-				4CC507581A3D100B006D1752 /* AppDelegate.swift in Sources */,
-				B0E1BC2F1A3FD18900475462 /* GroceryListViewController.swift in Sources */,
+				4CE108431A4116E90044794F /* GroceryListViewController.swift in Sources */,
+				4CE108411A4116CF0044794F /* MetaListViewController.swift in Sources */,
+				4CE1081E1A4116770044794F /* AppDelegate.swift in Sources */,
+				4CE108211A4116770044794F /* cartsy.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4CC507631A3D100B006D1752 /* Sources */ = {
+		4CE1082C1A4116770044794F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CC5076E1A3D100B006D1752 /* cartsyTests.swift in Sources */,
+				4CE108371A4116770044794F /* cartsyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4CC507691A3D100B006D1752 /* PBXTargetDependency */ = {
+		4CE108321A4116770044794F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4CC507511A3D100B006D1752 /* cartsy */;
-			targetProxy = 4CC507681A3D100B006D1752 /* PBXContainerItemProxy */;
+			target = 4CE108171A4116770044794F /* cartsy */;
+			targetProxy = 4CE108311A4116770044794F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		4CC507601A3D100B006D1752 /* LaunchScreen.xib */ = {
+		4CE108241A4116770044794F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4CC507611A3D100B006D1752 /* Base */,
+				4CE108251A4116770044794F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4CE108291A4116770044794F /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4CE1082A1A4116770044794F /* Base */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -259,7 +271,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		4CC5076F1A3D100B006D1752 /* Debug */ = {
+		4CE108381A4116770044794F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -301,7 +313,7 @@
 			};
 			name = Debug;
 		};
-		4CC507701A3D100B006D1752 /* Release */ = {
+		4CE108391A4116770044794F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -336,7 +348,7 @@
 			};
 			name = Release;
 		};
-		4CC507721A3D100B006D1752 /* Debug */ = {
+		4CE1083B1A4116770044794F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -346,7 +358,7 @@
 			};
 			name = Debug;
 		};
-		4CC507731A3D100B006D1752 /* Release */ = {
+		4CE1083C1A4116770044794F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -356,7 +368,7 @@
 			};
 			name = Release;
 		};
-		4CC507751A3D100B006D1752 /* Debug */ = {
+		4CE1083E1A4116770044794F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -375,7 +387,7 @@
 			};
 			name = Debug;
 		};
-		4CC507761A3D100B006D1752 /* Release */ = {
+		4CE1083F1A4116770044794F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -393,34 +405,45 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4CC5074D1A3D100B006D1752 /* Build configuration list for PBXProject "cartsy" */ = {
+		4CE108131A4116770044794F /* Build configuration list for PBXProject "cartsy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4CC5076F1A3D100B006D1752 /* Debug */,
-				4CC507701A3D100B006D1752 /* Release */,
+				4CE108381A4116770044794F /* Debug */,
+				4CE108391A4116770044794F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4CC507711A3D100B006D1752 /* Build configuration list for PBXNativeTarget "cartsy" */ = {
+		4CE1083A1A4116770044794F /* Build configuration list for PBXNativeTarget "cartsy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4CC507721A3D100B006D1752 /* Debug */,
-				4CC507731A3D100B006D1752 /* Release */,
+				4CE1083B1A4116770044794F /* Debug */,
+				4CE1083C1A4116770044794F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
-		4CC507741A3D100B006D1752 /* Build configuration list for PBXNativeTarget "cartsyTests" */ = {
+		4CE1083D1A4116770044794F /* Build configuration list for PBXNativeTarget "cartsyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4CC507751A3D100B006D1752 /* Debug */,
-				4CC507761A3D100B006D1752 /* Release */,
+				4CE1083E1A4116770044794F /* Debug */,
+				4CE1083F1A4116770044794F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4CE1081F1A4116770044794F /* cartsy.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4CE108201A4116770044794F /* cartsy.xcdatamodel */,
+			);
+			currentVersion = 4CE108201A4116770044794F /* cartsy.xcdatamodel */;
+			path = cartsy.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
-	rootObject = 4CC5074A1A3D100B006D1752 /* Project object */;
+	rootObject = 4CE108101A4116770044794F /* Project object */;
 }
