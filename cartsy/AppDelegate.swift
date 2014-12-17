@@ -12,6 +12,9 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    
+    // MARK: Boilerplate
+    
     var window: UIWindow?
 
 

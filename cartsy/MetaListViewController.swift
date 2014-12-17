@@ -30,7 +30,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         metaListTable.delegate = self
         metaListTable.dataSource = self
         tableData.append("Grocery List")            // TODO: make a tableCreation method
-        tableData.append("Other List")              // TODO: fill table from Core Data
+        tableData.append("Other List")              // TODO: fill table from Core Data, not hardcoded
         metaListTable.reloadData()
     }
     
@@ -49,7 +49,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        NSLog("Did select row at index path \(indexPath)")
+        NSLog("Did select row at index path \(indexPath)")            
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let groceryList = self.storyboard!.instantiateViewControllerWithIdentifier("MainList")! as GroceryListViewController // TODO: don't hardcode what list to go to.
         self.navigationController?.pushViewController(groceryList, animated: true)
