@@ -36,5 +36,5 @@ Sync with other members of the household, barcode scanning and ???
 ### v0.0.1
 * tableViews
 * Figure out what data service we will use: CoreData vs Sqlite vs ??? (core data won)
-
+* add Core Data to project in the most backwards way possible
  
