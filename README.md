@@ -7,7 +7,6 @@ Sync with other members of the household, barcode scanning and ???
 ## TODO Short-term
 
 ### MetaList
-* will have to use Core Data. Look at Diet Dict for basic idea
 * query db for list of lists
 * populate TableView from that list
 * have identifiers to track which list is related to which index
@@ -37,4 +36,5 @@ Sync with other members of the household, barcode scanning and ???
 * tableViews
 * Figure out what data service we will use: CoreData vs Sqlite vs ??? (core data won)
 * add Core Data to project in the most backwards way possible
+* stole code from Ray Wenderlich to enable core data saving and fetching
  
