@@ -14,37 +14,44 @@ import CoreData
 class MetaListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: IBOutlets
+    
+    /// TableView of Grocery Lists
     @IBOutlet weak var metaListTable: UITableView!
+    
+    /// Action to Add a new List object to Core Data
+    ///
+    /// :returns: nothing. Presents a New List dialogue
+    @IBAction func addNewList(sender: AnyObject) { // TODO: don't allow empty lists to be added
+        // UIAlertController will be displaying the alert.
+        var alert = UIAlertController(title: "Add", message: "Add new list", preferredStyle: .Alert)
+        // actions are the active components of the alert presented by the UIAlertController
+        let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in
+            let textField = alert.textFields![0] as UITextField // make UITextField in alert
+            self.saveList(textField.text)
+            self.metaListTable.reloadData()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in } // do nothing
+        // present alert
+        alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) -> Void in })
+        alert.addAction(cancelAction)
+        alert.addAction(saveAction)
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: Our Objects
+    /// data to populate list
     var tableData = [List]()
+    
+    /// our interface to the Core Data; who you Fetch from
     lazy var managedObjectContext: NSManagedObjectContext? =  {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        if let managedObjectContext = appDelegate.managedObjectContext {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate     // select our app delegate
+        if let managedObjectContext = appDelegate.managedObjectContext {                // this was created in AppDelegate as part of CoreData boilerplate
             return managedObjectContext
         } else {
             return nil
         }
     }()
-    
-    @IBAction func addNewList(sender: AnyObject) {
-        var alert = UIAlertController(title: "Add", message: "Add new list", preferredStyle: .Alert)
-        
-        let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in
-            let textField = alert.textFields![0] as UITextField
-            self.saveList(textField.text)
-            self.metaListTable.reloadData()
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in
-            //nothing
-        }
-        
-        alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) -> Void in
-        })
-        
-        alert.addAction(cancelAction)
-        alert.addAction(saveAction)
-        presentViewController(alert, animated: true, completion: nil)
-    }
+
     
     // MARK: Boiletplate Overrides
     
@@ -56,27 +63,16 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-//        let fetchRequest = NSFetchRequest(entityName: "List")
-//        var error: NSError?
-//        
-//        let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [List]
-//        
-//        if let results = fetchedResults {
-//            tableData = results
-//        } else {
-//            println("Could not fetch: \(error)")
-//        }
         self.fetchLists()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         metaListTable.delegate = self
         metaListTable.dataSource = self
         metaListTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ListCell")
-//        tableData.append("Grocery List")            // TODO: make a tableCreation method
-//        tableData.append("Other List")              // TODO: fill table from Core Data, not hardcoded
     }
     
     // MARK: Table View Delegate Functions
@@ -89,11 +85,11 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell: UITableViewCell = UITableViewCell(style: .Default, reuseIdentifier: "ListCell")
         cell.accessoryType = .DisclosureIndicator
         var rowData = tableData[indexPath.row]
-//        cell.textLabel?.text = rowData
         cell.textLabel!.text = rowData.valueForKey("name") as String?
         return cell
     }
     
+    /// Navigates to subList selected
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         NSLog("Did select row at index path \(indexPath)")            
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
@@ -103,11 +99,13 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     // MARK: Homerolled Functions
     
+    /// grabs Lists to populate Table from Context
+    ///
+    /// :returns: Void. fills tableData, used to populate tableView
     func fetchLists() -> Void {
-        let fetchRequest = NSFetchRequest(entityName: "List")
+        let fetchRequest = NSFetchRequest(entityName: "List") // want all lists
         var error: NSError?
-        
-        let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [List]
+        let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [List] // fetch Lists from Context
         
         if let results = fetchedResults {
             tableData = results
@@ -115,7 +113,10 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
             println("Could not fetch: \(error)")
         }
     }
-        
+    
+    /// saves a List in Context
+    ///
+    /// :returns: Void. CoreData will save List in PersistentStore
     func saveList(name: String) -> Void {
         let managedContext = self.managedObjectContext!
         let item = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: managedContext) as List
