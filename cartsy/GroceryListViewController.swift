@@ -40,10 +40,11 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     
     
     // MARK: Our Objects
-    /// Items to populate tableView
+    /// Array of Items to populate tableView
     var tableData = [Item]()
     
     /// our interface to CoreData; who you Fetch from and Save to.
+    /// This class's entrypoint to The Context.
     lazy var managedObjectContext: NSManagedObjectContext? =  {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         if let managedObjectContext = appDelegate.managedObjectContext {

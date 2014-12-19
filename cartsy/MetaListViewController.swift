@@ -40,10 +40,11 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     // MARK: Our Objects
-    /// Lists to populate tableView
+    /// Array of Lists to populate tableView
     var tableData = [List]()
     
-    /// our interface to the Core Data; who you Fetch from and Save to.
+    /// Our interface to the Core Data; who you Fetch from and Save to.
+    /// This class's entrypoint to The Context.
     lazy var managedObjectContext: NSManagedObjectContext? =  {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate     // select our app delegate
         if let managedObjectContext = appDelegate.managedObjectContext {                // this was created in AppDelegate as part of CoreData boilerplate

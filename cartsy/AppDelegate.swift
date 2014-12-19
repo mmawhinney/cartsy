@@ -67,9 +67,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("cartsy.sqlite")
         var error: NSError? = nil
+        // MARK: Lightweight Migration
+        /// options for lightweight migration
         var options: NSDictionary = [NSMigratePersistentStoresAutomaticallyOption: true,
             NSInferMappingModelAutomaticallyOption: true]
         var failureReason = "There was an error creating or loading the application's saved data."
+        /// this is where we perform lightweight migration.
         if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options, error: &error) == nil {
             coordinator = nil
             // Report any error we got.
