@@ -61,7 +61,7 @@
                     <navigationItem key="navigationItem" id="uOi-vb-2ld">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="J78-Tz-SMu">
                             <connections>
-                                <action selector="addButtonPressed:" destination="MCw-5L-ag0" id="0Ia-ar-XgF"/>
+                                <action selector="addNewItem:" destination="MCw-5L-ag0" id="NSI-sG-Mvf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

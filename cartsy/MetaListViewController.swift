@@ -13,7 +13,7 @@ import CoreData
 
 class MetaListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    // MARK: IBOutlets
+    // MARK: IBOutlets/Actions
     
     /// TableView of Grocery Lists
     @IBOutlet weak var metaListTable: UITableView!
@@ -27,7 +27,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         // actions are the active components of the alert presented by the UIAlertController
         let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in
             let textField = alert.textFields![0] as UITextField // make UITextField in alert
-            self.saveList(textField.text)
+            self.saveList(textField.text)                       // TODO: Don't allow someone to save empty List
             self.metaListTable.reloadData()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in } // do nothing
@@ -38,11 +38,12 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         presentViewController(alert, animated: true, completion: nil)
     }
     
+    
     // MARK: Our Objects
-    /// data to populate list
+    /// Lists to populate tableView
     var tableData = [List]()
     
-    /// our interface to the Core Data; who you Fetch from
+    /// our interface to the Core Data; who you Fetch from and Save to.
     lazy var managedObjectContext: NSManagedObjectContext? =  {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate     // select our app delegate
         if let managedObjectContext = appDelegate.managedObjectContext {                // this was created in AppDelegate as part of CoreData boilerplate
@@ -51,7 +52,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
             return nil
         }
     }()
-
+    
     
     // MARK: Boiletplate Overrides
     
@@ -70,9 +71,10 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        // setup our tableView
         metaListTable.delegate = self
         metaListTable.dataSource = self
-        metaListTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ListCell")
+        metaListTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ListCell") // TODO: Do we need this? What does it do? ¯\_(ツ)_/¯
     }
     
     // MARK: Table View Delegate Functions
@@ -119,14 +121,15 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     /// :returns: Void. CoreData will save List in PersistentStore
     func saveList(name: String) -> Void {
         let managedContext = self.managedObjectContext!
-        let item = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: managedContext) as List
-        item.name = name
-        
         var error: NSError?
+        let list = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: managedContext) as List
+        list.name = name
+        
         if !managedContext.save(&error) {
             println("Could not save! \(error)")
+        } else {
+            tableData.append(list)
         }
-        tableData.append(item)
     }
     
 }

@@ -2,7 +2,7 @@
 //  GroceryListViewController.swift
 //  cartsy
 //
-//  Created by Alex Popov on 2014-12-15.
+//  Created by Matheson Mawhinny and Alex Popov on 2014-12-15.
 //  Copyright (c) 2014 numbits. All rights reserved.
 //
 
@@ -11,10 +11,39 @@ import CoreData
 
 class GroceryListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-	// MARK: IBOutlets
+	// MARK: IBOutlets/Action
 	
+    /// TableView of Items on the selected Grocery List
     @IBOutlet weak var groceryListTable: UITableView!
+    
+    /// Action to Add a new Item object to Core Data
+    ///
+    /// :returns: nothing. Presents a New Item dialogue
+    @IBAction func addNewItem(sender: AnyObject) {
+        // UIAlertController will be displaying the alert
+        var alert = UIAlertController(title: "Add", message: "Add new item", preferredStyle: .Alert)
+        // actions are the active components of the alert
+        let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in
+            let textField = alert.textFields![0] as UITextField
+            self.saveName(textField.text)   // TODO: don't allow empty items to be added.
+            self.groceryListTable.reloadData()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in }
+        
+        // present alert
+        alert.addTextFieldWithConfigurationHandler( {
+            (textField: UITextField!) -> Void in } )
+        alert.addAction(cancelAction)
+        alert.addAction(saveAction)
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
+    // MARK: Our Objects
+    /// Items to populate tableView
     var tableData = [Item]()
+    
+    /// our interface to CoreData; who you Fetch from and Save to.
     lazy var managedObjectContext: NSManagedObjectContext? =  {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         if let managedObjectContext = appDelegate.managedObjectContext {
@@ -24,56 +53,22 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }()
     
-    // MARK: IBActions
-	
-    @IBAction func addButtonPressed(sender: AnyObject) {
-        var alert = UIAlertController(title: "Save", message: "Savey!", preferredStyle: .Alert)
-        
-        let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in
-            let textField = alert.textFields![0] as UITextField
-            self.saveName(textField.text)
-            self.groceryListTable.reloadData()
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in
-            // nothing
-        }
-        
-        alert.addTextFieldWithConfigurationHandler( {
-            (textField: UITextField!) -> Void in
-        } )
-        
-        alert.addAction(cancelAction)
-        alert.addAction(saveAction)
-        presentViewController(alert, animated: true, completion: nil)
-    }
-    
     // MARK: Boilerplate Code
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let fetchRequest = NSFetchRequest(entityName: "Item")
-        var error : NSError?
-        
-        let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [Item]
-        
-        if let results = fetchedResults {
-            tableData = results
-        } else {
-            println("Could not fetch: \(error)")
-        }
+        self.fetchItems()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        groceryListTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ItemCell") // what does this do?
-        
+        groceryListTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ItemCell") // what does this do? // TODO: do we need this?
         groceryListTable.delegate = self
         groceryListTable.dataSource = self
-        // groceryListTable.reloadData() // needed?
+        groceryListTable.reloadData() // needed? // TODO: Do we need this?
     }
     
     override func didReceiveMemoryWarning() {
@@ -95,23 +90,45 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        NSLog("Did select row at index path \(indexPath)")
+        NSLog("Did select row at index path \(indexPath)") // TODO: make tapping an item do something
+        // one thing to do here, would be to for example slide it off, 
+        // but leave it blank. Kind of like how reminds in the reminders app don't go away
+        // until you close the app. So you can still revert your choice
+        // if we do swiping, for example, going to other list can draw it blue (like Mailbox)
+        // and removing it can make it red. Just throwing out some ideas
     }
 	
 	// MARK: Homerolled Functions
     
+    /// grabs Items to populate TableView from Context
+    ///
+    /// :returns: Void. fills tableData, used to populate tableView
+    func fetchItems() {
+        let fetchRequest = NSFetchRequest(entityName: "Item") // grab all items
+        var error : NSError?
+        let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [Item]
+        
+        if let results = fetchedResults {
+            tableData = results
+        } else {
+            println("Could not fetch: \(error)")
+        }
+    }
+
+    /// saves an Item into the Context
+    ///
+    /// :returns: Void. CoreData will save Item in PersistentStore
     func saveName(name: String) -> Void {
         let managedContext = self.managedObjectContext!
-        let item = NSEntityDescription.insertNewObjectForEntityForName("Item", inManagedObjectContext: managedContext) as Item
-        
-        item.name = name
         var error : NSError?
+        let item = NSEntityDescription.insertNewObjectForEntityForName("Item", inManagedObjectContext: managedContext) as Item
+        item.name = name
         
         if !managedContext.save(&error) {
             println("Could not save! \(error)")
+        } else {
+            tableData.append(item)
         }
-        
-        tableData.append(item)
     }
     
     /*
