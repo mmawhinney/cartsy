@@ -4,7 +4,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="toList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="List" inverseName="toItems" inverseEntity="List" syncable="YES"/>
     </entity>
-    <entity name="List" syncable="YES">
+    <entity name="List" representedClassName="cartsy.List" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="toItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="toList" inverseEntity="Item" syncable="YES"/>
     </entity>

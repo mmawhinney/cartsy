@@ -30,10 +30,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="A26-Yg-A7t">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="69E-cx-9fa"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="69E-cx-9fa">
+                            <connections>
+                                <action selector="addNewList:" destination="n0m-to-A5o" id="1lf-78-t32"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addListButton" destination="69E-cx-9fa" id="M3T-bK-rzJ"/>
                         <outlet property="metaListTable" destination="6da-9s-CjT" id="1Eh-U3-XhF"/>
                         <segue destination="MCw-5L-ag0" kind="push" identifier="toGroceryList" id="ai0-2P-3s6"/>
                     </connections>

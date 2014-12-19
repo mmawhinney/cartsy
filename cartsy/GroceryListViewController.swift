@@ -14,7 +14,7 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
 	// MARK: IBOutlets
 	
     @IBOutlet weak var groceryListTable: UITableView!
-    var tableData = [NSManagedObject]()
+    var tableData = [Item]()
     lazy var managedObjectContext: NSManagedObjectContext? =  {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         if let managedObjectContext = appDelegate.managedObjectContext {
@@ -43,8 +43,8 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
             (textField: UITextField!) -> Void in
         } )
         
-        alert.addAction(saveAction)
         alert.addAction(cancelAction)
+        alert.addAction(saveAction)
         presentViewController(alert, animated: true, completion: nil)
     }
     
@@ -69,7 +69,7 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        groceryListTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell") // what does this do?
+        groceryListTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ItemCell") // what does this do?
         
         groceryListTable.delegate = self
         groceryListTable.dataSource = self
@@ -88,7 +88,7 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell(style: .Default, reuseIdentifier:  "Cell")
+        let cell: UITableViewCell = UITableViewCell(style: .Default, reuseIdentifier:  "ItemCell")
         let item = tableData[indexPath.row]
         cell.textLabel!.text = item.valueForKey("name") as String?
         return cell
@@ -102,11 +102,9 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     
     func saveName(name: String) -> Void {
         let managedContext = self.managedObjectContext!
-        let entity = NSEntityDescription.entityForName("Item", inManagedObjectContext: managedContext)
-        let item = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        let item = NSEntityDescription.insertNewObjectForEntityForName("Item", inManagedObjectContext: managedContext) as Item
         
-        item.setValue(name, forKey: "name")
-        
+        item.name = name
         var error : NSError?
         
         if !managedContext.save(&error) {
