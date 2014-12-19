@@ -14,6 +14,7 @@ import CoreData
 class MetaListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: IBOutlets
+    @IBOutlet weak var addListButton: UIBarButtonItem!
     @IBOutlet weak var metaListTable: UITableView!
     var tableData = [String]()
     

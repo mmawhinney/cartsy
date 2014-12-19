@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4CC53CDE1A43D6F5003BAA5C /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC53CDD1A43D6F5003BAA5C /* Item.swift */; };
+		4CC53CE01A43DC0E003BAA5C /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC53CDF1A43DC0E003BAA5C /* List.swift */; };
+		4CC53CE41A43E074003BAA5C /* cartsy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CC53CE21A43E074003BAA5C /* cartsy.xcdatamodeld */; };
 		4CE1081E1A4116770044794F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE1081D1A4116770044794F /* AppDelegate.swift */; };
-		4CE108211A4116770044794F /* cartsy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CE1081F1A4116770044794F /* cartsy.xcdatamodeld */; };
 		4CE108261A4116770044794F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CE108241A4116770044794F /* Main.storyboard */; };
 		4CE108281A4116770044794F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CE108271A4116770044794F /* Images.xcassets */; };
 		4CE1082B1A4116770044794F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE108291A4116770044794F /* LaunchScreen.xib */; };
@@ -28,10 +30,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4CC53CDD1A43D6F5003BAA5C /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		4CC53CDF1A43DC0E003BAA5C /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		4CC53CE31A43E074003BAA5C /* cartsy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = cartsy.xcdatamodel; sourceTree = "<group>"; };
+		4CC53CE51A43E15E003BAA5C /* cartsy v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "cartsy v2.xcdatamodel"; sourceTree = "<group>"; };
 		4CE108181A4116770044794F /* cartsy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cartsy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CE1081C1A4116770044794F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CE1081D1A4116770044794F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4CE108201A4116770044794F /* cartsy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = cartsy.xcdatamodel; sourceTree = "<group>"; };
 		4CE108251A4116770044794F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4CE108271A4116770044794F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4CE1082A1A4116770044794F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -81,11 +86,13 @@
 		4CE1081A1A4116770044794F /* cartsy */ = {
 			isa = PBXGroup;
 			children = (
+				4CC53CE21A43E074003BAA5C /* cartsy.xcdatamodeld */,
 				4CE1081D1A4116770044794F /* AppDelegate.swift */,
 				4CE108241A4116770044794F /* Main.storyboard */,
 				4CE108271A4116770044794F /* Images.xcassets */,
 				4CE108291A4116770044794F /* LaunchScreen.xib */,
-				4CE1081F1A4116770044794F /* cartsy.xcdatamodeld */,
+				4CC53CDF1A43DC0E003BAA5C /* List.swift */,
+				4CC53CDD1A43D6F5003BAA5C /* Item.swift */,
 				4CE1081B1A4116770044794F /* Supporting Files */,
 				4CE108441A4116FC0044794F /* ViewControllers */,
 			);
@@ -226,10 +233,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CC53CDE1A43D6F5003BAA5C /* Item.swift in Sources */,
+				4CC53CE41A43E074003BAA5C /* cartsy.xcdatamodeld in Sources */,
 				4CE108431A4116E90044794F /* GroceryListViewController.swift in Sources */,
 				4CE108411A4116CF0044794F /* MetaListViewController.swift in Sources */,
 				4CE1081E1A4116770044794F /* AppDelegate.swift in Sources */,
-				4CE108211A4116770044794F /* cartsy.xcdatamodeld in Sources */,
+				4CC53CE01A43DC0E003BAA5C /* List.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,12 +450,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		4CE1081F1A4116770044794F /* cartsy.xcdatamodeld */ = {
+		4CC53CE21A43E074003BAA5C /* cartsy.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				4CE108201A4116770044794F /* cartsy.xcdatamodel */,
+				4CC53CE51A43E15E003BAA5C /* cartsy v2.xcdatamodel */,
+				4CC53CE31A43E074003BAA5C /* cartsy.xcdatamodel */,
 			);
-			currentVersion = 4CE108201A4116770044794F /* cartsy.xcdatamodel */;
+			currentVersion = 4CC53CE51A43E15E003BAA5C /* cartsy v2.xcdatamodel */;
 			path = cartsy.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

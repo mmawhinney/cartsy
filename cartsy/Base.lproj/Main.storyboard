@@ -29,8 +29,11 @@
                             <constraint firstItem="6da-9s-CjT" firstAttribute="bottom" secondItem="vKl-GN-62B" secondAttribute="top" id="eah-va-aLV"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="A26-Yg-A7t"/>
+                    <navigationItem key="navigationItem" id="A26-Yg-A7t">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="69E-cx-9fa"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="addListButton" destination="69E-cx-9fa" id="M3T-bK-rzJ"/>
                         <outlet property="metaListTable" destination="6da-9s-CjT" id="1Eh-U3-XhF"/>
                         <segue destination="MCw-5L-ag0" kind="push" identifier="toGroceryList" id="ai0-2P-3s6"/>
                     </connections>

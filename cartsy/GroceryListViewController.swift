@@ -15,6 +15,14 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
 	
     @IBOutlet weak var groceryListTable: UITableView!
     var tableData = [NSManagedObject]()
+    lazy var managedObjectContext: NSManagedObjectContext? =  {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let managedObjectContext = appDelegate.managedObjectContext {
+            return managedObjectContext
+        } else {
+            return nil
+        }
+    }()
     
     // MARK: IBActions
 	
@@ -44,13 +52,11 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
         
         let fetchRequest = NSFetchRequest(entityName: "Item")
         var error : NSError?
         
-        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
+        let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [Item]
         
         if let results = fetchedResults {
             tableData = results
@@ -87,13 +93,15 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         cell.textLabel!.text = item.valueForKey("name") as String?
         return cell
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        NSLog("Did select row at index path \(indexPath)")
+    }
 	
 	// MARK: Homerolled Functions
     
     func saveName(name: String) -> Void {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
-        
+        let managedContext = self.managedObjectContext!
         let entity = NSEntityDescription.entityForName("Item", inManagedObjectContext: managedContext)
         let item = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         
