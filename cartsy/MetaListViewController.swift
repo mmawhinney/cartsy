@@ -25,6 +25,27 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }()
     
+    @IBAction func addNewList(sender: AnyObject) {
+        var alert = UIAlertController(title: "Add", message: "Add new list", preferredStyle: .Alert)
+        
+        let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in
+            let textField = alert.textFields![0] as UITextField
+            self.saveList(textField.text)
+            self.metaListTable.reloadData()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in
+            //nothing
+        }
+        
+        alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) -> Void in
+        })
+        
+        alert.addAction(cancelAction)
+        alert.addAction(saveAction)
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
     // MARK: Boiletplate Overrides
     
     override func didReceiveMemoryWarning() {
@@ -35,16 +56,17 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let fetchRequest = NSFetchRequest(entityName: "List")
-        var error: NSError?
-        
-        let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [List]
-        
-        if let results = fetchedResults {
-            tableData = results
-        } else {
-            println("Could not fetch: \(error)")
-        }
+//        let fetchRequest = NSFetchRequest(entityName: "List")
+//        var error: NSError?
+//        
+//        let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [List]
+//        
+//        if let results = fetchedResults {
+//            tableData = results
+//        } else {
+//            println("Could not fetch: \(error)")
+//        }
+        self.fetchLists()
     }
     
     override func viewDidLoad() {
@@ -81,25 +103,17 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     // MARK: Homerolled Functions
     
-    @IBAction func addNewList(sender: AnyObject) {
-        var alert = UIAlertController(title: "Add", message: "Add new list", preferredStyle: .Alert)
+    func fetchLists() -> Void {
+        let fetchRequest = NSFetchRequest(entityName: "List")
+        var error: NSError?
         
-        let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in
-            let textField = alert.textFields![0] as UITextField
-            self.saveList(textField.text)
-            self.metaListTable.reloadData()
+        let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [List]
+        
+        if let results = fetchedResults {
+            tableData = results
+        } else {
+            println("Could not fetch: \(error)")
         }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in
-            //nothing
-        }
-        
-        alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) -> Void in
-        })
-        
-        alert.addAction(cancelAction)
-        alert.addAction(saveAction)
-        presentViewController(alert, animated: true, completion: nil)
     }
         
     func saveList(name: String) -> Void {
