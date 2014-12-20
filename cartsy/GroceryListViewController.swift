@@ -121,9 +121,13 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func deleteName(indexPath: NSIndexPath) {
+        let managedContext = self.managedObjectContext!
         var error : NSError?
         let item = tableData[indexPath.row]
         managedObjectContext?.deleteObject(item)
+        if !managedContext.save(&error) {
+            println("Could not save! \(error)")
+        }
         self.fetchItems()
         groceryListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
 
