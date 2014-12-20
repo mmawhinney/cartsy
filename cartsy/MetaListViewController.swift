@@ -71,11 +71,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        // setup our tableView
-        metaListTable.delegate = self
-        metaListTable.dataSource = self
-        metaListTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ListCell") // TODO: Do we need this? What does it do? ¯\_(ツ)_/¯
+        self.setupListTable()
     }
     
     // MARK: Table View Delegate Functions
@@ -131,6 +127,14 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         } else {
             tableData.append(list)
         }
+    }
+    
+    /// sets delegate and dataSource for tableView
+    func setupListTable() {
+        // setup our tableView
+        metaListTable.delegate = self
+        metaListTable.dataSource = self
+        metaListTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ListCell") // TODO: Do we need this? What does it do? ¯\_(ツ)_/¯
     }
     
 }

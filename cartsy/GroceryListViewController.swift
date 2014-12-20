@@ -64,12 +64,7 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        groceryListTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ItemCell") // what does this do? // TODO: do we need this?
-        groceryListTable.delegate = self
-        groceryListTable.dataSource = self
-        groceryListTable.reloadData() // needed? // TODO: Do we need this?
+        self.setupItemTable()
     }
     
     override func didReceiveMemoryWarning() {
@@ -98,6 +93,7 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         // if we do swiping, for example, going to other list can draw it blue (like Mailbox)
         // and removing it can make it red. Just throwing out some ideas
     }
+
 	
 	// MARK: Homerolled Functions
     
@@ -130,6 +126,15 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         } else {
             tableData.append(item)
         }
+    }
+    
+    /// sets delegate and dataSource for tableView
+    func setupItemTable() {
+        // Do any additional setup after loading the view.
+        groceryListTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ItemCell") // what does this do? // TODO: do we need this?
+        groceryListTable.delegate = self
+        groceryListTable.dataSource = self
+        groceryListTable.reloadData() // needed? // TODO: Do we need this?
     }
     
     /*
