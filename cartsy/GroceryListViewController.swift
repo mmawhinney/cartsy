@@ -25,7 +25,7 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         // actions are the active components of the alert
         let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in
             let textField = alert.textFields![0] as UITextField
-            self.saveName(textField.text)   // TODO: don't allow empty items to be added.
+            self.saveItem(textField.text)   // TODO: don't allow empty items to be added.
             self.groceryListTable.reloadData()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in }
@@ -72,22 +72,8 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         // Dispose of any resources that can be recreated.
     }
     
-    // this is the editing actions
-//    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-//        
-//        var moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "More", handler:{action, indexpath in
-//            println("MORE•ACTION");
-//        });
-//        moreRowAction.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
-//        
-//        var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
-//            println("DELETE•ACTION");
-//        });
-//        
-//        return [deleteRowAction, moreRowAction];
-//    }
     
-	// MARK: TableView Delegate Functions
+	// MARK: TableView Functions
 	
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData.count
@@ -104,6 +90,7 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         return true
     }
     
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         NSLog("Did select row at index path \(indexPath)") // TODO: make tapping an item do something
         // one thing to do here, would be to for example slide it off, 
@@ -116,25 +103,43 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         // this enabled swiping, because why the fuck not.
         if (editingStyle == .Delete) {
-            self.deleteName(indexPath)
+            self.deleteItem(indexPath)
         }
     }
     
-    func deleteName(indexPath: NSIndexPath) {
-        let managedContext = self.managedObjectContext!
+    // this is the editing actions, adds a More button. I don't know how to write code for them though.
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        
+        var moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "More", handler:{action, indexpath in
+            println("MORE•ACTION");
+        });
+        moreRowAction.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
+        
+        var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
+            self.deleteItem(indexPath)
+            println("DELETE•ACTION");
+        });
+        
+        return [deleteRowAction, moreRowAction];
+    }
+    
+	
+	// MARK: Homerolled Functions
+    
+    /// deletes swiped item from the list.
+    ///
+    /// :returns: Void. Removes selected item from Core Data and reloads list.
+    func deleteItem(indexPath: NSIndexPath) { // TODO: consider using MGSwipeTableCell to have Mailbox-style swipable thingies.
         var error : NSError?
         let item = tableData[indexPath.row]
         managedObjectContext?.deleteObject(item)
-        if !managedContext.save(&error) {
+        if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")
         }
         self.fetchItems()
         groceryListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-
+        
     }
-
-	
-	// MARK: Homerolled Functions
     
     /// grabs Items to populate TableView from Context
     ///
@@ -154,13 +159,12 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     /// saves an Item into the Context
     ///
     /// :returns: Void. CoreData will save Item in PersistentStore
-    func saveName(name: String) -> Void {
-        let managedContext = self.managedObjectContext!
+    func saveItem(name: String) -> Void {
         var error : NSError?
-        let item = NSEntityDescription.insertNewObjectForEntityForName("Item", inManagedObjectContext: managedContext) as Item
+        let item = NSEntityDescription.insertNewObjectForEntityForName("Item", inManagedObjectContext: managedObjectContext!) as Item
         item.name = name
         
-        if !managedContext.save(&error) {
+        if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")
         } else {
             tableData.append(item)
