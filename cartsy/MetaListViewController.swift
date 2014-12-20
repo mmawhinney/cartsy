@@ -95,6 +95,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.title = "Cartsy"
         self.setupListTable()
     }
     
