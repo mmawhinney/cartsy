@@ -30,6 +30,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="A26-Yg-A7t">
+                        <barButtonItem key="leftBarButtonItem" title="Reset" id="3EL-uh-nYT">
+                            <connections>
+                                <action selector="resetData:" destination="n0m-to-A5o" id="Set-ts-OD2"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="69E-cx-9fa">
                             <connections>
                                 <action selector="addNewList:" destination="n0m-to-A5o" id="1lf-78-t32"/>

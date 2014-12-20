@@ -38,6 +38,30 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         presentViewController(alert, animated: true, completion: nil)
     }
     
+    /// Resets all lists and items
+    @IBAction func resetData(sender: AnyObject) { // TODO: at the end call a regenerator to return app to default state: Grocery List and Fridge List
+        // make an alert to acertain that we know that we're doing
+        var alert = UIAlertController(title: "Reset All Data", message: "This will remove all lists and items.\n Are you sure?", preferredStyle: .Alert)
+        let acceptAction = UIAlertAction(title: "Delete!", style: .Default) {(action: UIAlertAction!) -> Void in
+            self.resetAllData()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) {(action: UIAlertAction!) -> Void in } // do nothing
+        
+        alert.addAction(cancelAction)
+        alert.addAction(acceptAction)
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let persistentStoreCoordinator = appDelegate.persistentStoreCoordinator {
+            return persistentStoreCoordinator
+        } else {
+            return nil
+        }
+    }()
+    
+    
     
     // MARK: Our Objects
     /// Array of Lists to populate tableView
@@ -113,16 +137,34 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    func resetAllData() -> Void {
+        // continue with removal
+        let stores = persistentStoreCoordinator!.persistentStores as [NSPersistentStore]
+        var removeStoreError : NSError?
+        var removeItemError  : NSError?
+        for store in stores {
+            persistentStoreCoordinator?.removePersistentStore(store, error: &removeStoreError)
+            NSFileManager.defaultManager().removeItemAtPath(store.URL!.path!, error: &removeItemError)
+            if removeItemError?.isEqual(nil) == true {
+                println("Remove Item Error: \(removeItemError)")
+            }
+            if removeStoreError?.isEqual(nil) == true {
+                println("Remove Store Error: \(removeStoreError)")
+            }
+        }
+        self.tableData.removeAll(keepCapacity: false)
+        self.metaListTable.reloadData()
+    }
+    
     /// saves a List in Context
     ///
     /// :returns: Void. CoreData will save List in PersistentStore
     func saveList(name: String) -> Void {
-        let managedContext = self.managedObjectContext!
         var error: NSError?
-        let list = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: managedContext) as List
+        let list = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: self.managedObjectContext!) as List
         list.name = name
         
-        if !managedContext.save(&error) {
+        if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")
         } else {
             tableData.append(list)
