@@ -166,7 +166,8 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         var error : NSError?
         let item = NSEntityDescription.insertNewObjectForEntityForName("Item", inManagedObjectContext: managedObjectContext!) as Item
         item.name = name
-        //println("List toItem \(superList?.toItem)")
+        superList?.addItem(item)
+        println("List toItem \(superList?.toItems)")
         if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")
         } else {

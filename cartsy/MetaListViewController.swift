@@ -140,7 +140,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func resetAllData() -> Void {
-        // continue with removal
+//         continue with removal
         let stores = persistentStoreCoordinator!.persistentStores as [NSPersistentStore]
         var removeStoreError : NSError?
         var removeItemError  : NSError?
@@ -154,6 +154,11 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
                 println("Remove Store Error: \(removeStoreError)")
             }
         }
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.newPersistentStore()
+        
+        
         self.tableData.removeAll(keepCapacity: false)
         self.metaListTable.reloadData()
     }

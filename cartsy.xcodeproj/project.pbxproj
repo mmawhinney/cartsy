@@ -92,8 +92,8 @@
 				4CE108241A4116770044794F /* Main.storyboard */,
 				4CE108271A4116770044794F /* Images.xcassets */,
 				4CE108291A4116770044794F /* LaunchScreen.xib */,
-				4CC53CDF1A43DC0E003BAA5C /* List.swift */,
 				4CC53CDD1A43D6F5003BAA5C /* Item.swift */,
+				4CC53CDF1A43DC0E003BAA5C /* List.swift */,
 				4CE1081B1A4116770044794F /* Supporting Files */,
 				4CE108441A4116FC0044794F /* ViewControllers */,
 			);

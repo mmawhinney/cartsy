@@ -12,6 +12,11 @@ import CoreData
 class List: NSManagedObject {
 
     @NSManaged var name: String
-    @NSManaged var toItem: NSSet
+    @NSManaged var toItems: NSSet
+    
+    func addItem(item: Item) -> Void {
+        var manyItems = self.mutableSetValueForKey("toItems")
+        manyItems.addObject(item)
+    }
 
 }
