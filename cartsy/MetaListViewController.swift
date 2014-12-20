@@ -88,7 +88,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        println("Made it!")
         self.fetchLists()
     }
     
@@ -117,6 +117,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         NSLog("Did select row at index path \(indexPath)")            
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let groceryList = self.storyboard!.instantiateViewControllerWithIdentifier("MainList")! as GroceryListViewController // TODO: don't hardcode what list to go to.
+        groceryList.superList = tableData[indexPath.row]
         self.navigationController?.pushViewController(groceryList, animated: true)
     }
     

@@ -43,6 +43,8 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     /// Array of Items to populate tableView
     var tableData = [Item]()
     
+    var superList: List?
+    
     /// our interface to CoreData; who you Fetch from and Save to.
     /// This class's entrypoint to The Context.
     lazy var managedObjectContext: NSManagedObjectContext? =  {
@@ -64,6 +66,7 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = superList!.name
         self.setupItemTable()
     }
     
