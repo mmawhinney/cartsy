@@ -72,6 +72,21 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         // Dispose of any resources that can be recreated.
     }
     
+    // this is the editing actions
+//    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+//        
+//        var moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "More", handler:{action, indexpath in
+//            println("MORE•ACTION");
+//        });
+//        moreRowAction.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
+//        
+//        var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
+//            println("DELETE•ACTION");
+//        });
+//        
+//        return [deleteRowAction, moreRowAction];
+//    }
+    
 	// MARK: TableView Delegate Functions
 	
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -85,6 +100,10 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         return cell
     }
     
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         NSLog("Did select row at index path \(indexPath)") // TODO: make tapping an item do something
         // one thing to do here, would be to for example slide it off, 
@@ -92,6 +111,22 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         // until you close the app. So you can still revert your choice
         // if we do swiping, for example, going to other list can draw it blue (like Mailbox)
         // and removing it can make it red. Just throwing out some ideas
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        // this enabled swiping, because why the fuck not.
+        if (editingStyle == .Delete) {
+            self.deleteName(indexPath)
+        }
+    }
+    
+    func deleteName(indexPath: NSIndexPath) {
+        var error : NSError?
+        let item = tableData[indexPath.row]
+        managedObjectContext?.deleteObject(item)
+        self.fetchItems()
+        groceryListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+
     }
 
 	
