@@ -139,12 +139,13 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    /// erase all data in stores
     func resetAllData() -> Void {
 //         continue with removal
         let stores = persistentStoreCoordinator!.persistentStores as [NSPersistentStore]
         var removeStoreError : NSError?
         var removeItemError  : NSError?
-        for store in stores {
+        for store in stores { // this will remove all the sqlite stores
             persistentStoreCoordinator?.removePersistentStore(store, error: &removeStoreError)
             NSFileManager.defaultManager().removeItemAtPath(store.URL!.path!, error: &removeItemError)
             if removeItemError?.isEqual(nil) == true {
@@ -154,7 +155,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
                 println("Remove Store Error: \(removeStoreError)")
             }
         }
-        
+        // now we have to reinstantiate at least one so we don't crash
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         appDelegate.newPersistentStore()
         

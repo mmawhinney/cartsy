@@ -148,7 +148,8 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     ///
     /// :returns: Void. fills tableData, used to populate tableView
     func fetchItems() {
-        let fetchRequest = NSFetchRequest(entityName: "Item") // grab all items
+        var fetchRequest = NSFetchRequest(entityName: "Item") // grab all
+        fetchRequest.predicate = NSPredicate(format: "ANY toList = %@", superList!)  // TODO: find predicate to get all items of list
         var error : NSError?
         let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [Item]
         
@@ -166,7 +167,7 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         var error : NSError?
         let item = NSEntityDescription.insertNewObjectForEntityForName("Item", inManagedObjectContext: managedObjectContext!) as Item
         item.name = name
-        superList?.addItem(item)
+        superList!.addItem(item)
         println("List toItem \(superList?.toItems)")
         if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")
