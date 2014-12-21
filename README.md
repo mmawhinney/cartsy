@@ -29,12 +29,4 @@ Sync with other members of the household, barcode scanning and ???
 ### Products Backend
 * figure out a free product db and/or a barcode scanning db. 
 * fast fuzzy-search and autocomplete 
-
-## TODONE
-
-### v0.0.1
-* tableViews
-* Figure out what data service we will use: CoreData vs Sqlite vs ??? (core data won)
-* add Core Data to project in the most backwards way possible
-* stole code from Ray Wenderlich to enable core data saving and fetching
  
