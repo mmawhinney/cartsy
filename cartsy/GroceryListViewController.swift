@@ -83,9 +83,19 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell(style: .Default, reuseIdentifier:  "ItemCell")
+        let cell: MGSwipeTableCell = MGSwipeTableCell(style: .Default, reuseIdentifier:  "ItemCell")
         let item = tableData[indexPath.row]
         cell.textLabel!.text = item.valueForKey("name") as String?
+//        //configure left buttons // TODO: try this out. Obj-C code needs to be translated
+//        cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"check.png"] backgroundColor:[UIColor greenColor]],
+//        [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"fav.png"] backgroundColor:[UIColor blueColor]]];
+//        cell.leftSwipeSettings.transition = MGSwipeTransition3D;
+//        
+//        //configure right buttons
+//        cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor]],
+//        [MGSwipeButton buttonWithTitle:@"More" backgroundColor:[UIColor lightGrayColor]]];
+//        cell.rightSwipeSettings.transition = MGSwipeTransition3D;
+        
         return cell
     }
     
