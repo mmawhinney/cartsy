@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class GroceryListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class GroceryListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MGSwipeTableCellDelegate {
     
 	// MARK: IBOutlets/Action
 	
@@ -90,8 +90,15 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
 //        cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"check.png"] backgroundColor:[UIColor greenColor]],
 //        [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"fav.png"] backgroundColor:[UIColor blueColor]]];
 //        cell.leftSwipeSettings.transition = MGSwipeTransition3D;
-//        
+        cell.leftButtons = [MGSwipeButton(title: "Push", backgroundColor: UIColor.blueColor())]
+        cell.leftExpansion.buttonIndex = 0
+        cell.leftSwipeSettings.transition = MGSwipeTransition.TransitionBorder
+        cell.leftExpansion.fillOnTrigger = true
 //        //configure right buttons
+        cell.rightButtons = [MGSwipeButton(title: "Delete", backgroundColor: UIColor.redColor())]
+        cell.rightExpansion.buttonIndex = 0
+        cell.rightSwipeSettings.transition = MGSwipeTransition.TransitionBorder
+        cell.rightExpansion.fillOnTrigger = true
 //        cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor]],
 //        [MGSwipeButton buttonWithTitle:@"More" backgroundColor:[UIColor lightGrayColor]]];
 //        cell.rightSwipeSettings.transition = MGSwipeTransition3D;
@@ -113,27 +120,70 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         // and removing it can make it red. Just throwing out some ideas
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        // this enabled swiping, because why the fuck not.
-        if (editingStyle == .Delete) {
-            self.deleteItem(indexPath)
-        }
+//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        // this enabled swiping, because why the fuck not.
+//        if (editingStyle == .Delete) {
+//            self.deleteItem(indexPath)
+//        }
+//    }
+    
+    // this is the editing actions, adds a More button.
+//    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+//        
+//        var moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "More", handler:{action, indexpath in
+//            println("MORE•ACTION");
+//        });
+//        moreRowAction.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
+//        
+//        var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
+//            self.deleteItem(indexPath)
+//            println("DELETE•ACTION");
+//        });
+//        
+//        return [deleteRowAction, moreRowAction];
+//    }
+    
+    // MARK: MGSwipeTable Delegate
+    
+    /// Delegate method to enable/disable swipe gestures
+    ///
+    /// :returns: YES if swipe is allowed
+    func swipeTableCell(cell: MGSwipeTableCell!, canSwipe direction: MGSwipeDirection) -> Bool {
+        return true
     }
     
-    // this is the editing actions, adds a More button. I don't know how to write code for them though.
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        
-        var moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "More", handler:{action, indexpath in
-            println("MORE•ACTION");
-        });
-        moreRowAction.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
-        
-        var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
-            self.deleteItem(indexPath)
-            println("DELETE•ACTION");
-        });
-        
-        return [deleteRowAction, moreRowAction];
+    /// Delegate method invoked when the current swipe state changes
+    ///
+    /// :param: state the current Swipe State
+    /// :param: gestureIsActive YES if the user swipe gesture is active. No if the uses has already ended the gesture
+    func swipeTableCell(cell: MGSwipeTableCell!, didChangeSwipeState state: MGSwipeState, gestureIsActive: Bool) {
+        // TODO: didChangeSwipeState
+    }
+    
+    /// Called when the user clicks a swipe button or when a expandable button is automatically triggered
+    /// :returns: YES to autohide the current swipe buttons
+    func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction:
+        MGSwipeDirection, fromExpansion: Bool) -> Bool {
+        if direction == MGSwipeDirection.RightToLeft {
+            println("swiped Right to Left!")
+            let indexPath = groceryListTable.indexPathForCell(cell)
+            self.deleteItem(indexPath!)
+        }
+        println("swipped or tapped!")
+        return true
+    }
+    /// * Delegate method to setup the swipe buttons and swipe/expansion settings
+    /// * Buttons can be any kind of UIView but it's recommended to use the convenience MGSwipeButton class
+    /// * Setting up buttons with this delegate instead of using cell properties improves memory usage because buttons are only created in demand
+    ///
+    /// :param: swipeTableCell the UITableViewCell to configure. You can get the indexPath using [tableView indexPathForCell:cell]
+    /// :param: direction The swipe direction (left to right or right to left)
+    /// :param: swipeSettings instance to configure the swipe transition and setting (optional)
+    /// :param: expansionSettings instance to configure button expansions (optional)
+    /// :returns: Buttons array
+    func swipeTableCell(cell: MGSwipeTableCell!, swipeButtonsForDirection direction: MGSwipeDirection, swipeSettings: MGSwipeSettings!, expansionSettings: MGSwipeExpansionSettings!) -> [AnyObject]! {
+        // nothing
+        return nil
     }
     
 	

@@ -10,6 +10,7 @@
 #define cartsy_BridgingHeader_h
 
 #import <MGSwipeTableCell/MGSwipeTableCell.h>
+#import <MGSwipeTableCell/MGSwipeButton.h>
 
 
 #endif
