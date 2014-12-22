@@ -27,7 +27,9 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         // actions are the active components of the alert presented by the UIAlertController
         let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in
             let textField = alert.textFields![0] as UITextField // make UITextField in alert
-            self.saveList(textField.text)                       // TODO: Don't allow someone to save empty List
+            if textField.text != "" {
+                self.saveList(textField.text)
+            }
             self.metaListTable.reloadData()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in } // do nothing
@@ -173,7 +175,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         list.name = name
         println("List name: \(list.name)")
         list.toConjugalList = list              // FIXME
-        println("Twin list: \(list.toConjugalList)")
+        println("Twin list: \(list.toConjugalList.name)")
         if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")
         } else {
