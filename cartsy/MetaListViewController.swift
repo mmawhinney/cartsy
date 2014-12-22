@@ -21,29 +21,12 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     /// Action to Add a new List object to Core Data
     ///
     /// :returns: nothing. Presents a New List dialogue
-    @IBAction func addNewList(sender: AnyObject) { // TODO: don't allow empty lists to be added
-        // UIAlertController will be displaying the alert.
-        var alert = UIAlertController(title: "Add", message: "Add new list", preferredStyle: .Alert)
-        // actions are the active components of the alert presented by the UIAlertController
-        let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in
-            let textField = alert.textFields![0] as UITextField // make UITextField in alert
-            let listName = textField.text.stringByTrimmingWhitespace()
-            if !listName.isEmpty {
-                self.saveList(listName)
-            }
-            self.metaListTable.reloadData()
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in } // do nothing
-        // present alert
-        alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) -> Void in })
-        alert.addAction(cancelAction)
-        alert.addAction(saveAction)
-        presentViewController(alert, animated: true, completion: nil)
+    @IBAction func addNewList(sender: AnyObject) {
+        addNewPressed(object: "list", inTable: metaListTable, savedAs: saveList)
     }
     
     /// Resets all lists and items
     @IBAction func resetData(sender: AnyObject) { // TODO: at the end call a regenerator to return app to default state: Grocery List and Fridge List
-        // make an alert to acertain that we know that we're doing
         var alert = UIAlertController(title: "Reset All Data", message: "This will remove all lists and items.\n Are you sure?", preferredStyle: .Alert)
         let acceptAction = UIAlertAction(title: "Delete!", style: .Default) {(action: UIAlertAction!) -> Void in
             self.resetAllData()
@@ -175,7 +158,8 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         let list = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: self.managedObjectContext!) as List
         list.name = name
         println("List name: \(list.name)")
-        list.toConjugalList = list              // FIXME
+        list.toConjugalList = list              /// TODO: ask, in a dialog, what list to join with
+                                                /// TODO: Decide if we want to be able to join to only one list, or to many
         println("Twin list: \(list.toConjugalList.name)")
         if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")
