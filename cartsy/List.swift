@@ -9,10 +9,12 @@
 import Foundation
 import CoreData
 
+//@objc(List)
 class List: NSManagedObject {
 
     @NSManaged var name: String
     @NSManaged var toItems: NSSet
+    @NSManaged var toConjugalList: List
     
     func addItem(item: Item) -> Void {
         var manyItems = self.mutableSetValueForKey("toItems")
@@ -20,3 +22,5 @@ class List: NSManagedObject {
     }
 
 }
+
+

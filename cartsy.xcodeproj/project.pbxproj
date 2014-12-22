@@ -45,6 +45,8 @@
 		4CE108361A4116770044794F /* cartsyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cartsyTests.swift; sourceTree = "<group>"; };
 		4CE108401A4116CF0044794F /* MetaListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetaListViewController.swift; sourceTree = "<group>"; };
 		4CE108421A4116E90044794F /* GroceryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListViewController.swift; sourceTree = "<group>"; };
+		B09299221A47944400105B28 /* cartsy v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "cartsy v3.xcdatamodel"; sourceTree = "<group>"; };
+		B09299231A4795A900105B28 /* cartsy v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "cartsy v4.xcdatamodel"; sourceTree = "<group>"; };
 		B0FD8EF91A46069900A2B33C /* ignore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ignore.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -455,10 +457,12 @@
 			isa = XCVersionGroup;
 			children = (
 				4CC53CE51A43E15E003BAA5C /* cartsy v2.xcdatamodel */,
+				B09299221A47944400105B28 /* cartsy v3.xcdatamodel */,
+				B09299231A4795A900105B28 /* cartsy v4.xcdatamodel */,
 				B0FD8EF91A46069900A2B33C /* ignore.xcdatamodel */,
 				4CC53CE31A43E074003BAA5C /* cartsy.xcdatamodel */,
 			);
-			currentVersion = 4CC53CE51A43E15E003BAA5C /* cartsy v2.xcdatamodel */;
+			currentVersion = B09299221A47944400105B28 /* cartsy v3.xcdatamodel */;
 			path = cartsy.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

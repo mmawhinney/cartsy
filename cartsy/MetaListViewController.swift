@@ -171,7 +171,9 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         var error: NSError?
         let list = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: self.managedObjectContext!) as List
         list.name = name
-        
+        println("List name: \(list.name)")
+        list.toConjugalList = list              // FIXME
+        println("Twin list: \(list.toConjugalList)")
         if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")
         } else {

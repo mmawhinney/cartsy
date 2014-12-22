@@ -112,18 +112,11 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     
     // this is the editing actions, adds a More button. I don't know how to write code for them though.
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        
-        var moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "More", handler:{action, indexpath in
-            println("MORE•ACTION");
-        });
-        moreRowAction.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
-        
         var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
             self.deleteItem(indexPath)
-            println("DELETE•ACTION");
         });
         
-        return [deleteRowAction, moreRowAction];
+        return [deleteRowAction];
     }
     
 	
