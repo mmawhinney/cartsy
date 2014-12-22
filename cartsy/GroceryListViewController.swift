@@ -25,10 +25,14 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         // actions are the active components of the alert
         let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in
             let textField = alert.textFields![0] as UITextField
-            if textField.text != "" {
-                self.saveItem(textField.text)
+            let itemName = textField.text.stringByTrimmingWhitespace()
+    
+            if !itemName.isEmpty {
+                self.saveItem(itemName)
+                self.groceryListTable.reloadData()
+            } else {
+                
             }
-            self.groceryListTable.reloadData()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in }
         

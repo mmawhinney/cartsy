@@ -27,8 +27,9 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         // actions are the active components of the alert presented by the UIAlertController
         let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in
             let textField = alert.textFields![0] as UITextField // make UITextField in alert
-            if textField.text != "" {
-                self.saveList(textField.text)
+            let listName = textField.text.stringByTrimmingWhitespace()
+            if !listName.isEmpty {
+                self.saveList(listName)
             }
             self.metaListTable.reloadData()
         }

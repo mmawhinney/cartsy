@@ -17,6 +17,7 @@
 		4CE108371A4116770044794F /* cartsyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE108361A4116770044794F /* cartsyTests.swift */; };
 		4CE108411A4116CF0044794F /* MetaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE108401A4116CF0044794F /* MetaListViewController.swift */; };
 		4CE108431A4116E90044794F /* GroceryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE108421A4116E90044794F /* GroceryListViewController.swift */; };
+		B00B39211A47F7D500471A8F /* NSString Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00B39201A47F7D500471A8F /* NSString Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		4CE108361A4116770044794F /* cartsyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cartsyTests.swift; sourceTree = "<group>"; };
 		4CE108401A4116CF0044794F /* MetaListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetaListViewController.swift; sourceTree = "<group>"; };
 		4CE108421A4116E90044794F /* GroceryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListViewController.swift; sourceTree = "<group>"; };
+		B00B39201A47F7D500471A8F /* NSString Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString Extensions.swift"; sourceTree = "<group>"; };
 		B09299221A47944400105B28 /* cartsy v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "cartsy v3.xcdatamodel"; sourceTree = "<group>"; };
 		B09299231A4795A900105B28 /* cartsy v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "cartsy v4.xcdatamodel"; sourceTree = "<group>"; };
 		B0FD8EF91A46069900A2B33C /* ignore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ignore.xcdatamodel; sourceTree = "<group>"; };
@@ -89,13 +91,14 @@
 		4CE1081A1A4116770044794F /* cartsy */ = {
 			isa = PBXGroup;
 			children = (
-				4CC53CE21A43E074003BAA5C /* cartsy.xcdatamodeld */,
 				4CE1081D1A4116770044794F /* AppDelegate.swift */,
-				4CE108241A4116770044794F /* Main.storyboard */,
 				4CE108271A4116770044794F /* Images.xcassets */,
 				4CE108291A4116770044794F /* LaunchScreen.xib */,
+				4CE108241A4116770044794F /* Main.storyboard */,
+				4CC53CE21A43E074003BAA5C /* cartsy.xcdatamodeld */,
 				4CC53CDD1A43D6F5003BAA5C /* Item.swift */,
 				4CC53CDF1A43DC0E003BAA5C /* List.swift */,
+				B00B39201A47F7D500471A8F /* NSString Extensions.swift */,
 				4CE1081B1A4116770044794F /* Supporting Files */,
 				4CE108441A4116FC0044794F /* ViewControllers */,
 			);
@@ -239,6 +242,7 @@
 				4CC53CDE1A43D6F5003BAA5C /* Item.swift in Sources */,
 				4CC53CE41A43E074003BAA5C /* cartsy.xcdatamodeld in Sources */,
 				4CE108431A4116E90044794F /* GroceryListViewController.swift in Sources */,
+				B00B39211A47F7D500471A8F /* NSString Extensions.swift in Sources */,
 				4CE108411A4116CF0044794F /* MetaListViewController.swift in Sources */,
 				4CE1081E1A4116770044794F /* AppDelegate.swift in Sources */,
 				4CC53CE01A43DC0E003BAA5C /* List.swift in Sources */,
