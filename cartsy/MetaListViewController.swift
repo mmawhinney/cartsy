@@ -55,7 +55,10 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     // +++++++++++++++++++++++++++
     
     /// Array of Lists to populate tableView
-    var tableData = [List]()
+    var groceryLists = [List]()
+    var mainList = List?()
+    
+    
     
     /// Our interface to the Core Data; who you Fetch from and Save to.
     /// This class's entrypoint to The Context.
@@ -81,13 +84,13 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewWillAppear(animated)
         println("Made it!")
         self.fetchLists()
+        if (groceryLists.isEmpty) {
+            self.generateDefaults()
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if (tableData.isEmpty) {
-            self.generateDefaults()
-        }
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "Cartsy"
         self.setupListTable()
@@ -98,14 +101,28 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     // +++++++++++++++++++++++++++++++++++++++++++++
     
     func tableView(tableView: UITableView, numberOfRowsInSection: Int) -> Int {
-        return tableData.count
+        if numberOfRowsInSection == 0 { // numberOfRowsInSection specifies WHICH section we're in
+            return 1
+        } else {
+            return groceryLists.count - 1
+        }
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(style: .Default, reuseIdentifier: "ListCell")
         cell.accessoryType = .DisclosureIndicator
-        var rowData = tableData[indexPath.row]
-        cell.textLabel!.text = rowData.valueForKey("name") as String?
+        if (indexPath.section == 1) {
+        var rowData = groceryLists[indexPath.row]
+        cell.textLabel!.text = rowData.name
+        } else {
+            var rowData = groceryLists[indexPath.row]
+            cell.textLabel!.text = rowData.name
+            cell.textLabel!.font = UIFont.boldSystemFontOfSize(16)
+        }
         return cell
     }
     
@@ -114,7 +131,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         NSLog("Did select row at index path \(indexPath)")            
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let groceryList = self.storyboard!.instantiateViewControllerWithIdentifier("MainList")! as GroceryListViewController
-        groceryList.superList = tableData[indexPath.row]
+        groceryList.superList = groceryLists[indexPath.row]
         self.navigationController?.pushViewController(groceryList, animated: true)
     }
     // +++++++++++++++++++++++++++++++++++++++++++++
@@ -126,11 +143,11 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return tableData.count
+        return groceryLists.count
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return tableData[row].name
+        return groceryLists[row].name
     }
     
     
@@ -147,7 +164,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [List] // fetch Lists from Context
         
         if let results = fetchedResults {
-            tableData = results
+            groceryLists = results
         } else {
             println("Could not fetch: \(error)")
         }
@@ -161,13 +178,14 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         var error : NSError?
         fridgeList.name = "Fridge"
         fridgeList.toConjugalList = groceryList
+        mainList = fridgeList
         println("Grocery list conjugal is: \(groceryList.toConjugalList.name) and")
         println("Fridge list conjugal is \(fridgeList.toConjugalList.name)")
         if !managedObjectContext!.save(&error) {
             println("Could not Save!")
         } else {
-            tableData.append(groceryList)
-            tableData.append(fridgeList)
+            groceryLists.append(fridgeList)
+            groceryLists.append(groceryList)
         }
     }
     
@@ -192,7 +210,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         appDelegate.newPersistentStore()
         
-        self.tableData.removeAll(keepCapacity: false)
+        self.groceryLists.removeAll(keepCapacity: false)
         self.generateDefaults()
         self.metaListTable.reloadData()
     }
@@ -200,6 +218,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     /// present a UIView Overlay to pick which list to be Conjugal
     func pickConjugal(list: List) -> Void {
         /// TODO: when we decide how we want to handle conjugates, fill this in
+        list.toConjugalList = list // TODO: allow other conjugal lists?
         }
     
     /// saves a List in Context
@@ -211,14 +230,14 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         list.name = name
         println("List name: \(list.name)")
         self.pickConjugal(list)
-        list.toConjugalList = list              /// TODO: ask, in a dialog, what list to join with
+        // list.toConjugalList = list              /// TODO: ask, in a dialog, what list to join with
                                                 /// TODO: Decide if we want to be able to join to only one list, or to many
         println("Twin list: \(list.toConjugalList.name)")
         
         if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")
         } else {
-            tableData.append(list)
+            groceryLists.append(list)
         }
     }
     
