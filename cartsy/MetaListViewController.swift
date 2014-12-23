@@ -180,6 +180,11 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
 //        }
 //    }
     
+    /// fetch List entities for tableView
+    ///
+    /// :param: mainList Boolean, is this a sublist or our Main Fridge List
+    /// 
+    /// :returns: Optional Array of Lists. If no lists were fetched we may return a nil. This must be handled properly.
     func fetchLists(mainList: Bool = false) -> [List]? { // TODO: if we couldn't fetch results, think of an elegant way of recovering instead of unwrapping a nil as we do currently
         let fetchRequest = NSFetchRequest(entityName: "List") // want all lists
         fetchRequest.predicate = NSPredicate(format: "ANY isParent = %@", mainList)
@@ -191,19 +196,6 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         } else {
             println("Could not fetch: \(error)")
             return nil
-        }
-    }
-    
-    func fetchMain() -> Void {
-        let fetchRequest = NSFetchRequest(entityName: "List") // want all lists
-        fetchRequest.predicate = NSPredicate(format: "ANY isParent = %@", true)
-        var error: NSError?
-        let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [List] // fetch Lists from Context
-        
-        if let results = fetchedResults {
-            mainList = results[0]
-        } else {
-            println("Could not fetch: \(error)")
         }
     }
     
