@@ -111,23 +111,21 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 2 // hardcoded for now
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(style: .Default, reuseIdentifier: "ListCell")
         cell.accessoryType = .DisclosureIndicator
         
-        if (indexPath.section == 1) {
-        var rowData = groceryLists[indexPath.row]
-        cell.textLabel!.text = rowData.name
-            
-        } else {
+        if (indexPath.section == 0) {   // if we're in the first section show mainList
             var rowData = mainList!
             cell.textLabel!.text = rowData.name
-            cell.textLabel!.font = UIFont.boldSystemFontOfSize(16)
+            cell.textLabel!.font = UIFont.boldSystemFontOfSize(16) // TODO: make this follow system sizes instead (for blind people using auto-sized text)
+        } else {                        // otherwise show the other sublists
+            var rowData = groceryLists[indexPath.row]
+            cell.textLabel!.text = rowData.name
         }
-        
         return cell
     }
     
@@ -143,6 +141,8 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         self.navigationController?.pushViewController(groceryList, animated: true)
     }
+    
+    
     // +++++++++++++++++++++++++++++++++++++++++++++
     // |    MARK: Picker View Delegate Function    |
     // +++++++++++++++++++++++++++++++++++++++++++++

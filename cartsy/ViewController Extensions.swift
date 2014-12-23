@@ -22,7 +22,8 @@ extension UIViewController {
         var alert = UIAlertController(title: "Add", message: "Add new \(object)", preferredStyle: .Alert)
         let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in
             let textField = alert.textFields![0] as UITextField
-            let name = textField.text.stringByTrimmingWhitespace()
+            var name = textField.text.stringByTrimmingWhitespace()
+            name = name.sanitize(capitalize: true, singleSpaces: true)
             if name.isEmpty == false {
                 savedAs(name)
             } else {

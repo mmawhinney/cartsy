@@ -20,4 +20,17 @@ extension String {
         }
         return trimmed!
     }
+    
+    // capitalize string and remove any occurances of double+ spacing
+    func sanitize(capitalize: Bool = true, singleSpaces: Bool = true) -> String {
+        var tempString = self as NSString // had to cast because finding out length of a Swift String is impossible
+        if (capitalize) {
+            tempString = tempString.capitalizedString
+        }
+        if (singleSpaces) {
+            tempString = tempString.stringByReplacingOccurrencesOfString("[ ]+", withString: " ", options: NSStringCompareOptions.RegularExpressionSearch, range: NSRangeFromString(tempString)) /// FIXME: regex doesn't eliminate all double+ spaces
+            tempString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        }
+        return tempString
+    }
 }
