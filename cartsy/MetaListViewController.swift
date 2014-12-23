@@ -13,7 +13,9 @@ import CoreData
 
 class MetaListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    // MARK: IBOutlets/Actions
+    // +++++++++++++++++++++++++++++++++
+    // |    MARK: IBOutlets/Actions    |
+    // +++++++++++++++++++++++++++++++++
     
     /// TableView of Grocery Lists
     @IBOutlet weak var metaListTable: UITableView!
@@ -48,8 +50,10 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     }()
     
     
+    // +++++++++++++++++++++++++++
+    // |    MARK: Our Objects    |
+    // +++++++++++++++++++++++++++
     
-    // MARK: Our Objects
     /// Array of Lists to populate tableView
     var tableData = [List]()
     
@@ -64,7 +68,9 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }()
     
-    // MARK: Boiletplate Overrides
+    // +++++++++++++++++++++++++++++++++++++
+    // |    MARK: Boiletplate Overrides    |
+    // +++++++++++++++++++++++++++++++++++++
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -79,12 +85,17 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if (tableData.isEmpty) {
+            self.generateDefaults()
+        }
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "Cartsy"
         self.setupListTable()
     }
     
-    // MARK: Table View Delegate Functions
+    // +++++++++++++++++++++++++++++++++++++++++++++
+    // |    MARK: Table View Delegate Functions    |
+    // +++++++++++++++++++++++++++++++++++++++++++++
     
     func tableView(tableView: UITableView, numberOfRowsInSection: Int) -> Int {
         return tableData.count
@@ -106,8 +117,9 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         groceryList.superList = tableData[indexPath.row]
         self.navigationController?.pushViewController(groceryList, animated: true)
     }
-    
-    // MARK: Picker View Delegate Function
+    // +++++++++++++++++++++++++++++++++++++++++++++
+    // |    MARK: Picker View Delegate Function    |
+    // +++++++++++++++++++++++++++++++++++++++++++++
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -122,8 +134,9 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
-    
-    // MARK: Homerolled Functions
+    // +++++++++++++++++++++++++++++++++++++
+    // |    MARK: Homerolled Functions     |
+    // +++++++++++++++++++++++++++++++++++++
     
     /// grabs Lists to populate Table from Context
     ///
@@ -140,12 +153,30 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    /// Generate our two base lists and link them
+    func generateDefaults() -> Void {
+        let groceryList = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: self.managedObjectContext!) as List
+        groceryList.name = "Groceries"
+        let fridgeList = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: self.managedObjectContext!) as List
+        var error : NSError?
+        fridgeList.name = "Fridge"
+        fridgeList.toConjugalList = groceryList
+        println("Grocery list conjugal is: \(groceryList.toConjugalList.name) and")
+        println("Fridge list conjugal is \(fridgeList.toConjugalList.name)")
+        if !managedObjectContext!.save(&error) {
+            println("Could not Save!")
+        } else {
+            tableData.append(groceryList)
+            tableData.append(fridgeList)
+        }
+    }
+    
     /// erase all data in stores
     func resetAllData() -> Void {
-//         continue with removal
         let stores = persistentStoreCoordinator!.persistentStores as [NSPersistentStore]
         var removeStoreError : NSError?
         var removeItemError  : NSError?
+        
         for store in stores { // this will remove all the sqlite stores
             persistentStoreCoordinator?.removePersistentStore(store, error: &removeStoreError)
             NSFileManager.defaultManager().removeItemAtPath(store.URL!.path!, error: &removeItemError)
@@ -156,12 +187,13 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
                 println("Remove Store Error: \(removeStoreError)")
             }
         }
+        
         // now we have to reinstantiate at least one so we don't crash
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         appDelegate.newPersistentStore()
         
-        
         self.tableData.removeAll(keepCapacity: false)
+        self.generateDefaults()
         self.metaListTable.reloadData()
     }
     
@@ -182,6 +214,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         list.toConjugalList = list              /// TODO: ask, in a dialog, what list to join with
                                                 /// TODO: Decide if we want to be able to join to only one list, or to many
         println("Twin list: \(list.toConjugalList.name)")
+        
         if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")
         } else {

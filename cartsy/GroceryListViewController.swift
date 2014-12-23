@@ -11,7 +11,9 @@ import CoreData
 
 class GroceryListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-	// MARK: IBOutlets/Action
+    // +++++++++++++++++++++++++++++++++
+    // |    MARK: IBOutlets/Actions    |
+    // +++++++++++++++++++++++++++++++++
 	
     /// TableView of Items on the selected Grocery List
     @IBOutlet weak var groceryListTable: UITableView!
@@ -46,7 +48,10 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     
-    // MARK: Our Objects
+    // +++++++++++++++++++++++++++
+    // |    MARK: Our Objects    |
+    // +++++++++++++++++++++++++++
+    
     /// Array of Items to populate tableView
     var tableData = [Item]()
     
@@ -63,7 +68,9 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }()
     
-    // MARK: Boilerplate Code
+    // +++++++++++++++++++++++++++++++++++++
+    // |    MARK: Boiletplate Overrides    |
+    // +++++++++++++++++++++++++++++++++++++
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -83,7 +90,9 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     
-	// MARK: TableView Functions
+    // +++++++++++++++++++++++++++++++++++++++++++++
+    // |    MARK: Table View Delegate Functions    |
+    // +++++++++++++++++++++++++++++++++++++++++++++
 	
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData.count
@@ -127,7 +136,9 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
 	
-	// MARK: Homerolled Functions
+    // +++++++++++++++++++++++++++++++++++++
+    // |    MARK: Homerolled Functions     |
+    // +++++++++++++++++++++++++++++++++++++
     
     /// deletes swiped item from the list.
     ///
