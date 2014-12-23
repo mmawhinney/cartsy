@@ -83,11 +83,12 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         println("Made it!")
-        self.fetchLists()
+//        self.fetchLists()
+        groceryLists = fetchLists()!
         if (groceryLists.isEmpty) {
             self.generateDefaults()
         }
-        self.fetchMain()
+        mainList = self.fetchLists(mainList: true)![0]
     }
     
     override func viewDidLoad() {
@@ -132,10 +133,14 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     /// Navigates to subList selected
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        NSLog("Did select row at index path \(indexPath)")            
+        NSLog("Did select row at index path \(indexPath.row) in section \(indexPath.section)")
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let groceryList = self.storyboard!.instantiateViewControllerWithIdentifier("MainList")! as GroceryListViewController
-        groceryList.superList = groceryLists[indexPath.row]
+        if indexPath.section == 0 {
+            groceryList.superList = mainList
+        } else {
+            groceryList.superList = groceryLists[indexPath.row]
+        }
         self.navigationController?.pushViewController(groceryList, animated: true)
     }
     // +++++++++++++++++++++++++++++++++++++++++++++
@@ -162,14 +167,41 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     /// grabs Lists to populate Table from Context
     ///
     /// :returns: Void. fills tableData, used to populate tableView
-    func fetchLists() -> Void {
+//    func fetchLists() -> Void {
+//        let fetchRequest = NSFetchRequest(entityName: "List") // want all lists
+//        fetchRequest.predicate = NSPredicate(format: "ANY isParent = %@", false)
+//        var error: NSError?
+//        let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [List] // fetch Lists from Context
+//        
+//        if let results = fetchedResults {
+//            groceryLists = results
+//        } else {
+//            println("Could not fetch: \(error)")
+//        }
+//    }
+    
+    func fetchLists(mainList: Bool = false) -> [List]? { // TODO: if we couldn't fetch results, think of an elegant way of recovering instead of unwrapping a nil as we do currently
         let fetchRequest = NSFetchRequest(entityName: "List") // want all lists
-        fetchRequest.predicate = NSPredicate(format: "ANY isParent = %@", false)
+        fetchRequest.predicate = NSPredicate(format: "ANY isParent = %@", mainList)
         var error: NSError?
         let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [List] // fetch Lists from Context
         
         if let results = fetchedResults {
-            groceryLists = results
+            return results
+        } else {
+            println("Could not fetch: \(error)")
+            return nil
+        }
+    }
+    
+    func fetchMain() -> Void {
+        let fetchRequest = NSFetchRequest(entityName: "List") // want all lists
+        fetchRequest.predicate = NSPredicate(format: "ANY isParent = %@", true)
+        var error: NSError?
+        let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [List] // fetch Lists from Context
+        
+        if let results = fetchedResults {
+            mainList = results[0]
         } else {
             println("Could not fetch: \(error)")
         }
@@ -191,19 +223,6 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
             println("Could not Save!")
         } else {
             groceryLists.append(groceryList)
-        }
-    }
-    
-    func fetchMain() -> Void {
-        let fetchRequest = NSFetchRequest(entityName: "List") // want all lists
-        fetchRequest.predicate = NSPredicate(format: "ANY isParent = %@", true)
-        var error: NSError?
-        let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [List] // fetch Lists from Context
-        
-        if let results = fetchedResults {
-            mainList = results[0]
-        } else {
-            println("Could not fetch: \(error)")
         }
     }
     
