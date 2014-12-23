@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 
 
-class MetaListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MetaListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     // MARK: IBOutlets/Actions
     
@@ -64,7 +64,6 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }()
     
-    
     // MARK: Boiletplate Overrides
     
     override func didReceiveMemoryWarning() {
@@ -103,10 +102,26 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         NSLog("Did select row at index path \(indexPath)")            
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        let groceryList = self.storyboard!.instantiateViewControllerWithIdentifier("MainList")! as GroceryListViewController // TODO: don't hardcode what list to go to.
+        let groceryList = self.storyboard!.instantiateViewControllerWithIdentifier("MainList")! as GroceryListViewController
         groceryList.superList = tableData[indexPath.row]
         self.navigationController?.pushViewController(groceryList, animated: true)
     }
+    
+    // MARK: Picker View Delegate Function
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return tableData.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return tableData[row].name
+    }
+    
+    
     
     // MARK: Homerolled Functions
     
@@ -150,6 +165,11 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         self.metaListTable.reloadData()
     }
     
+    /// present a UIView Overlay to pick which list to be Conjugal
+    func pickConjugal(list: List) -> Void {
+        /// TODO: when we decide how we want to handle conjugates, fill this in
+        }
+    
     /// saves a List in Context
     ///
     /// :returns: Void. CoreData will save List in PersistentStore
@@ -158,6 +178,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         let list = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: self.managedObjectContext!) as List
         list.name = name
         println("List name: \(list.name)")
+        self.pickConjugal(list)
         list.toConjugalList = list              /// TODO: ask, in a dialog, what list to join with
                                                 /// TODO: Decide if we want to be able to join to only one list, or to many
         println("Twin list: \(list.toConjugalList.name)")

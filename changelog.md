@@ -13,6 +13,7 @@
 * made a reset button to erase all content
 * introduced a nasty bug where adding a list after a reset caused a crash
 * implemented relationships between items and lists
+* stopped hard-coding what list to go to
 * items now appear only in appropriate sublist
 
 ## V0.1.2
@@ -20,3 +21,4 @@
 * No longer allow empty Lists/Items, or ones that include trailing/leading white spaces
 * wrote convenience NSString extension to perform the above sanitization
 * Made relationship between lists and their conjugates possible
+* Generalized addButton with a UIViewController extension and Swift magic
