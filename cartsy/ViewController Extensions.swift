@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-    /// + Button Pressed
+    /// Add Button Pressed
     ///
     /// :param: object String representation of what you're saving, only used in alert dialogue
     /// :param: inTable UITableView of current View to reload data.
