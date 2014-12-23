@@ -22,28 +22,6 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     ///
     /// :returns: nothing. Presents a New Item dialogue
     @IBAction func addNewItem(sender: AnyObject) {
-//        // UIAlertController will be displaying the alert
-//        var alert = UIAlertController(title: "Add", message: "Add new item", preferredStyle: .Alert)
-//        // actions are the active components of the alert
-//        let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in
-//            let textField = alert.textFields![0] as UITextField
-//            let itemName = textField.text.stringByTrimmingWhitespace()
-//    
-//            if !itemName.isEmpty == false{
-//                self.saveItem(itemName)
-//                self.groceryListTable.reloadData()
-//            } else {
-//                /// TODO: tell user they can't save bullshit
-//            }
-//        }
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in }
-//        
-//        // present alert
-//        alert.addTextFieldWithConfigurationHandler( {
-//            (textField: UITextField!) -> Void in } )
-//        alert.addAction(cancelAction)
-//        alert.addAction(saveAction)
-//        presentViewController(alert, animated: true, completion: nil)
         addNewPressed(object: "item", inTable: groceryListTable, savedAs: saveItem)
     }
     

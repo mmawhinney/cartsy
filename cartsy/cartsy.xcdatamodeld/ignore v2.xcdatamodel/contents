@@ -5,13 +5,12 @@
         <relationship name="toList" maxCount="1" deletionRule="Nullify" destinationEntity="List" inverseName="toItems" inverseEntity="List" syncable="YES"/>
     </entity>
     <entity name="List" representedClassName="cartsy.List" syncable="YES">
-        <attribute name="isParent" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="toConjugalList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="List" inverseName="toConjugalList" inverseEntity="List" syncable="YES"/>
         <relationship name="toItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="toList" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
         <element name="Item" positionX="-36" positionY="9" width="128" height="75"/>
-        <element name="List" positionX="-243" positionY="17" width="128" height="105"/>
+        <element name="List" positionX="-243" positionY="17" width="128" height="88"/>
     </elements>
 </model>

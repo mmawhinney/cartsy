@@ -87,6 +87,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         if (groceryLists.isEmpty) {
             self.generateDefaults()
         }
+        self.fetchMain()
     }
     
     override func viewDidLoad() {
@@ -104,7 +105,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         if numberOfRowsInSection == 0 { // numberOfRowsInSection specifies WHICH section we're in
             return 1
         } else {
-            return groceryLists.count - 1
+            return groceryLists.count
         }
     }
     
@@ -115,14 +116,17 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(style: .Default, reuseIdentifier: "ListCell")
         cell.accessoryType = .DisclosureIndicator
+        
         if (indexPath.section == 1) {
         var rowData = groceryLists[indexPath.row]
         cell.textLabel!.text = rowData.name
+            
         } else {
-            var rowData = groceryLists[indexPath.row]
+            var rowData = mainList!
             cell.textLabel!.text = rowData.name
             cell.textLabel!.font = UIFont.boldSystemFontOfSize(16)
         }
+        
         return cell
     }
     
@@ -160,6 +164,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     /// :returns: Void. fills tableData, used to populate tableView
     func fetchLists() -> Void {
         let fetchRequest = NSFetchRequest(entityName: "List") // want all lists
+        fetchRequest.predicate = NSPredicate(format: "ANY isParent = %@", false)
         var error: NSError?
         let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [List] // fetch Lists from Context
         
@@ -178,14 +183,27 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         var error : NSError?
         fridgeList.name = "Fridge"
         fridgeList.toConjugalList = groceryList
+        fridgeList.isParent = true
         mainList = fridgeList
         println("Grocery list conjugal is: \(groceryList.toConjugalList.name) and")
         println("Fridge list conjugal is \(fridgeList.toConjugalList.name)")
         if !managedObjectContext!.save(&error) {
             println("Could not Save!")
         } else {
-            groceryLists.append(fridgeList)
             groceryLists.append(groceryList)
+        }
+    }
+    
+    func fetchMain() -> Void {
+        let fetchRequest = NSFetchRequest(entityName: "List") // want all lists
+        fetchRequest.predicate = NSPredicate(format: "ANY isParent = %@", true)
+        var error: NSError?
+        let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [List] // fetch Lists from Context
+        
+        if let results = fetchedResults {
+            mainList = results[0]
+        } else {
+            println("Could not fetch: \(error)")
         }
     }
     
@@ -218,7 +236,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     /// present a UIView Overlay to pick which list to be Conjugal
     func pickConjugal(list: List) -> Void {
         /// TODO: when we decide how we want to handle conjugates, fill this in
-        list.toConjugalList = list // TODO: allow other conjugal lists?
+        list.toConjugalList = mainList! // TODO: allow other conjugal lists?
         }
     
     /// saves a List in Context

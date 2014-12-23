@@ -11,9 +11,12 @@ import CoreData
 
 class List: NSManagedObject {
 
-    @NSManaged var name: String
-    @NSManaged var toItems: NSSet
-    @NSManaged var toConjugalList: List
+    // Attributes
+    @NSManaged var name:            String
+    @NSManaged var isParent:          Bool
+    // Relationships
+    @NSManaged var toItems:         NSSet
+    @NSManaged var toConjugalList:  List
     
     func addItem(item: Item) -> Void {
         var manyItems = self.mutableSetValueForKey("toItems")
