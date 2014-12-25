@@ -61,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return NSManagedObjectModel(contentsOfURL: modelURL)!
     }()
     
+    /// creates a new persistent store from our sqlite db
     func newPersistentStore() {
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("cartsy.sqlite")
         var error: NSError? = nil
@@ -85,6 +86,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
     }
+    
+//    /// save changes
+//    func saveContext() -> Bool {
+//        var error: NSError?
+//        if !managedObjectContext!.save(&error) {
+//            println("Could not save! \(error)")
+//            return false
+//        } else {
+//            return true
+//        }
+//    }
 
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.

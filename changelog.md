@@ -22,3 +22,9 @@
 * wrote convenience NSString extension to perform the above sanitization
 * Made relationship between lists and their conjugates possible
 * Generalized addButton with a UIViewController extension and Swift magic
+
+## V0.1.3
+
+* Fixed Predicate
+* Implemented Functionality to Move Items to Fridge list
+* 

@@ -138,13 +138,13 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
-    func moveItem(indexPath: NSIndexPath) {
+    func moveItem(indexPath: NSIndexPath) { // TODO: does not work from Fridge! Conjugals are to-one, so we'll need a picker of some kind when moving from the fridge
         let item = tableData[indexPath.row]
         println("Moving item from \(item.toList.name)")
         item.toList = mainList!
-        println("To \(item.toList.name)")
-        println("toList is of type: \(_stdlib_getTypeName(item.toList.toItems))") /// FIXME: after it fetches it complains that it needs an NSSet. This IS an NSSet
-        self.fetchItems()
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.saveContext()
+        self.fetchItems() // TODO: figure out why swapping this line and the next one crashes the app on move.
         groceryListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
     }
     
@@ -154,7 +154,7 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     func fetchItems() {                                                     /// TODO: make this return an array of Items that will be asigned to tableData. I don't like methods with side-effects
         var fetchRequest = NSFetchRequest(entityName: "Item") // grab all
         println("\(superList!.name) has items: \(superList!.toItems)")
-        fetchRequest.predicate = NSPredicate(format: "ANY toList = %@", superList!)
+        fetchRequest.predicate = NSPredicate(format: "toList = %@", superList!)
         var error : NSError?
         let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [Item]
         
@@ -172,7 +172,7 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         var error : NSError?
         let item = NSEntityDescription.insertNewObjectForEntityForName("Item", inManagedObjectContext: managedObjectContext!) as Item
         item.name = name
-        superList!.addItem(item)
+        superList!.addItem(item)        // TODO: maybe remove this Side-Effect
         println("List toItem \(superList!.toItems)")
         if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")
