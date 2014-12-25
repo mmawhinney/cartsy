@@ -138,16 +138,6 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
-    func moveItem(indexPath: NSIndexPath) { // TODO: does not work from Fridge! Conjugals are to-one, so we'll need a picker of some kind when moving from the fridge
-        let item = tableData[indexPath.row]
-        println("Moving item from \(item.toList.name)")
-        item.toList = mainList!
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        appDelegate.saveContext()
-        self.fetchItems() // TODO: figure out why swapping this line and the next one crashes the app on move.
-        groceryListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-    }
-    
     /// grabs Items to populate TableView from Context
     ///
     /// :returns: Void. fills tableData, used to populate tableView
@@ -163,6 +153,17 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         } else {
             println("Could not fetch: \(error)")
         }
+    }
+    
+    /// moves an Item to the Fridge. Only works from shopping lists
+    func moveItem(indexPath: NSIndexPath) { // TODO: does not work from Fridge! Conjugals are to-one, so we'll need a picker of some kind when moving from the fridge
+        let item = tableData[indexPath.row]
+        println("Moving item from \(item.toList.name)")
+        item.toList = mainList!
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.saveContext()
+        self.fetchItems() // TODO: figure out why swapping this line and the next one crashes the app on move.
+        groceryListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
     }
 
     /// saves an Item into the Context

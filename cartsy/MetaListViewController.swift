@@ -135,9 +135,9 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let groceryList = self.storyboard!.instantiateViewControllerWithIdentifier("MainList")! as GroceryListViewController
         if indexPath.section == 0 {
-            groceryList.superList = mainList
+            groceryList.superList = mainList // TODO: mainList should have a seperate ViewController
         } else {
-            groceryList.superList = groceryLists[indexPath.row]
+            groceryList.superList = groceryLists[indexPath.row] // TODO: Make a generalized ItemViewController and subclass it for MainList and Sublists
         }
         groceryList.mainList = mainList
         self.navigationController?.pushViewController(groceryList, animated: true)
@@ -165,21 +165,6 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     // |    MARK: Homerolled Functions     |
     // +++++++++++++++++++++++++++++++++++++
     
-    /// grabs Lists to populate Table from Context
-    ///
-    /// :returns: Void. fills tableData, used to populate tableView
-//    func fetchLists() -> Void {
-//        let fetchRequest = NSFetchRequest(entityName: "List") // want all lists
-//        fetchRequest.predicate = NSPredicate(format: "ANY isParent = %@", false)
-//        var error: NSError?
-//        let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [List] // fetch Lists from Context
-//        
-//        if let results = fetchedResults {
-//            groceryLists = results
-//        } else {
-//            println("Could not fetch: \(error)")
-//        }
-//    }
     
     /// Generate our two base lists and link them
     func generateDefaults() -> Void {
