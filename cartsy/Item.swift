@@ -12,6 +12,6 @@ import CoreData
 class Item: NSManagedObject {
 
     @NSManaged var name: String
-    @NSManaged var toList: NSManagedObject
+    @NSManaged var toList: List
 
 }

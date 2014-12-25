@@ -32,8 +32,8 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     
     /// Array of Items to populate tableView
     var tableData = [Item]()
-    
     var superList: List?
+    var mainList: List?
     
     /// our interface to CoreData; who you Fetch from and Save to.
     /// This class's entrypoint to The Context.
@@ -52,8 +52,8 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.fetchItems()
+        mainList = self.fetchLists(self.managedObjectContext!, mainList: true)![0]
     }
     
     override func viewDidLoad() {
@@ -109,8 +109,13 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
             self.deleteItem(indexPath)
         });
+        var moveRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Move", handler:{action, indexpath in
+            self.moveItem(indexPath)
+        });
+    
+        moveRowAction.backgroundColor = UIColor.blueColor()
         
-        return [deleteRowAction];
+        return [deleteRowAction, moveRowAction];
     }
     
 	
@@ -133,11 +138,22 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
+    func moveItem(indexPath: NSIndexPath) {
+        let item = tableData[indexPath.row]
+        println("Moving item from \(item.toList.name)")
+        item.toList = mainList!
+        println("To \(item.toList.name)")
+        println("toList is of type: \(_stdlib_getTypeName(item.toList.toItems))") /// FIXME: after it fetches it complains that it needs an NSSet. This IS an NSSet
+        self.fetchItems()
+        groceryListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+    }
+    
     /// grabs Items to populate TableView from Context
     ///
     /// :returns: Void. fills tableData, used to populate tableView
-    func fetchItems() {
+    func fetchItems() {                                                     /// TODO: make this return an array of Items that will be asigned to tableData. I don't like methods with side-effects
         var fetchRequest = NSFetchRequest(entityName: "Item") // grab all
+        println("\(superList!.name) has items: \(superList!.toItems)")
         fetchRequest.predicate = NSPredicate(format: "ANY toList = %@", superList!)
         var error : NSError?
         let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [Item]

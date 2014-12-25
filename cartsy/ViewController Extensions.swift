@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 extension UIViewController {
     /// Add Button Pressed
@@ -37,6 +38,25 @@ extension UIViewController {
         alert.addAction(cancelAction)
         alert.addAction(saveAction)
         presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    /// fetch List entities for tableView
+    ///
+    /// :param: mainList Boolean, is this a sublist or our Main Fridge List
+    ///
+    /// :returns: Optional Array of Lists. If no lists were fetched we may return a nil. This must be handled properly.
+    func fetchLists(managedObjectContext: NSManagedObjectContext, mainList: Bool = false) -> [List]? { // TODO: if we couldn't fetch results, think of an elegant way of recovering instead of unwrapping a nil as we do currently
+        let fetchRequest = NSFetchRequest(entityName: "List") // want all lists
+        fetchRequest.predicate = NSPredicate(format: "ANY isParent = %@", mainList)
+        var error: NSError?
+        let fetchedResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as? [List] // fetch Lists from Context
+        
+        if let results = fetchedResults {
+            return results
+        } else {
+            println("Could not fetch: \(error)")
+            return nil
+        }
     }
     
 }

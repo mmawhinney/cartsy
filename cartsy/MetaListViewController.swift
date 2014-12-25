@@ -84,11 +84,11 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewWillAppear(animated)
         println("Made it!")
 //        self.fetchLists()
-        groceryLists = fetchLists()!
+        groceryLists = fetchLists(self.managedObjectContext!)!
         if (groceryLists.isEmpty) {
             self.generateDefaults()
         }
-        mainList = self.fetchLists(mainList: true)![0]
+        mainList = self.fetchLists(self.managedObjectContext!, mainList: true)![0]
     }
     
     override func viewDidLoad() {
@@ -139,6 +139,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         } else {
             groceryList.superList = groceryLists[indexPath.row]
         }
+        groceryList.mainList = mainList
         self.navigationController?.pushViewController(groceryList, animated: true)
     }
     
@@ -179,25 +180,6 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
 //            println("Could not fetch: \(error)")
 //        }
 //    }
-    
-    /// fetch List entities for tableView
-    ///
-    /// :param: mainList Boolean, is this a sublist or our Main Fridge List
-    /// 
-    /// :returns: Optional Array of Lists. If no lists were fetched we may return a nil. This must be handled properly.
-    func fetchLists(mainList: Bool = false) -> [List]? { // TODO: if we couldn't fetch results, think of an elegant way of recovering instead of unwrapping a nil as we do currently
-        let fetchRequest = NSFetchRequest(entityName: "List") // want all lists
-        fetchRequest.predicate = NSPredicate(format: "ANY isParent = %@", mainList)
-        var error: NSError?
-        let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [List] // fetch Lists from Context
-        
-        if let results = fetchedResults {
-            return results
-        } else {
-            println("Could not fetch: \(error)")
-            return nil
-        }
-    }
     
     /// Generate our two base lists and link them
     func generateDefaults() -> Void {
