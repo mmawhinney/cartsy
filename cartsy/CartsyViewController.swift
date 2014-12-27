@@ -101,7 +101,7 @@ class CartsyViewController: UIViewController, UITableViewDataSource, UITableView
             if name.isEmpty == false {
                 savedAs(name)
             } else {
-                println("we fucked up, empty string!") /// TODO: give a proper dialog saying not to save bullshit
+                println("we fucked up, empty string!") /// TODO: give a proper dialog saying not to save bullshit.
             }
             inTable.reloadData()
         }
