@@ -131,7 +131,8 @@ class CartsyViewController: UIViewController, UITableViewDataSource, UITableView
     /// :param: mainList Boolean, is this a sublist or our Main Fridge List
     ///
     /// :returns: Optional Array of Lists. If no lists were fetched we may return a nil. This must be handled properly.
-    func fetchLists(managedObjectContext: NSManagedObjectContext, mainList: Bool = false) -> [List]? { // TODO: if we couldn't fetch results, think of an elegant way of recovering instead of unwrapping a nil as we do currently
+    func fetchLists(managedObjectContext: NSManagedObjectContext, mainList: Bool = false) -> [List]? {
+        // TODO: if we couldn't fetch results, think of an elegant way of recovering instead of unwrapping a nil as we do currently
         let fetchRequest = NSFetchRequest(entityName: "List") // want all lists
         fetchRequest.predicate = NSPredicate(format: "isMain = %@", mainList)
         var error: NSError?
