@@ -120,7 +120,7 @@ class CartsyViewController: UIViewController, UITableViewDataSource, UITableView
         var error : NSError?
         var object = fromArray[atIndexPath.row] as NSManagedObject
         
-        managedObjectContext?.deleteObject(object)
+        managedObjectContext?.deleteObject(object) // TODO: what if it doesn't save properly?
         if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")
         }
