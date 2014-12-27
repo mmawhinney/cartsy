@@ -13,10 +13,9 @@ class List: NSManagedObject {
 
     // Attributes
     @NSManaged var name:            String
-    @NSManaged var isParent:          Bool
+    @NSManaged var isMain:          Bool
     // Relationships
     @NSManaged var toItems:         NSSet
-    @NSManaged var toConjugalList:  List
     
     func addItem(item: Item) -> Void {
         var manyItems = self.mutableSetValueForKey("toItems")

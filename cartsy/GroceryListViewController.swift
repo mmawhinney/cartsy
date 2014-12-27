@@ -132,7 +132,7 @@ class GroceryListViewController: CartsyViewController {
     }
     
     /// moves an Item to the Fridge. Only works from shopping lists
-    func moveItem(indexPath: NSIndexPath) { // TODO: does not work from Fridge! Conjugals are to-one, so we'll need a picker of some kind when moving from the fridge
+    func moveItem(indexPath: NSIndexPath) { // TODO: does not work from Fridge! We'll need a picker of some kind when moving from the fridge
         let item = tableData[indexPath.row]
         println("Moving item from \(item.toList.name)")
         item.toList = mainList!
