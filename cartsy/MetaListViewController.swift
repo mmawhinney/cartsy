@@ -41,36 +41,13 @@ class MetaListViewController: CartsyViewController {
     }
     
     
-    
-    
     // +++++++++++++++++++++++++++
     // |    MARK: Our Objects    |
     // +++++++++++++++++++++++++++
     
     /// Array of Lists to populate tableView
     var groceryLists = [List]()
-//    override var mainList = List?()
-    
-//    /// Manages Save Files
-//    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
-//        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-//        if let persistentStoreCoordinator = appDelegate.persistentStoreCoordinator {
-//            return persistentStoreCoordinator
-//        } else {
-//            return nil
-//        }
-//        }()
-//    
-//    /// Our interface to the Core Data; who you Fetch from and Save to.
-//    /// This class's entrypoint to The Context.
-//    lazy var managedObjectContext: NSManagedObjectContext? =  {
-//        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate     // select our app delegate
-//        if let managedObjectContext = appDelegate.managedObjectContext {                // this was created in AppDelegate as part of CoreData boilerplate
-//            return managedObjectContext
-//        } else {
-//            return nil
-//        }
-//    }()
+
     
     // +++++++++++++++++++++++++++++++++++++
     // |    MARK: Boiletplate Overrides    |

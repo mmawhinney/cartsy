@@ -34,16 +34,6 @@ class GroceryListViewController: CartsyViewController {
     var tableData = [Item]()
     var superList: List?
     
-    /// our interface to CoreData; who you Fetch from and Save to.
-    /// This class's entrypoint to The Context.
-//    lazy var managedObjectContext: NSManagedObjectContext? =  {
-//        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-//        if let managedObjectContext = appDelegate.managedObjectContext {
-//            return managedObjectContext
-//        } else {
-//            return nil
-//        }
-//    }()
     
     // +++++++++++++++++++++++++++++++++++++
     // |    MARK: Boiletplate Overrides    |
@@ -176,15 +166,5 @@ class GroceryListViewController: CartsyViewController {
         groceryListTable.dataSource = self
         groceryListTable.reloadData() // needed? // TODO: Do we need this?
     }
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
     
 }
