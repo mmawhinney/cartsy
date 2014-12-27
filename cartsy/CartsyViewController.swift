@@ -118,10 +118,8 @@ class CartsyViewController: UIViewController, UITableViewDataSource, UITableView
     /// :returns: Void. Removes selected item from Core Data
     func deleteObject(fromArray: [AnyObject], atIndexPath: NSIndexPath) { // TODO: consider using MGSwipeTableCell to have Mailbox-style swipable thingies.
         var error : NSError?
-        let object = fromArray[atIndexPath.row] as NSManagedObject
-        if (object.isKindOfClass(List)) {
-            println("Tried to Delete a List!")
-        }
+        var object = fromArray[atIndexPath.row] as NSManagedObject
+        
         managedObjectContext?.deleteObject(object)
         if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")

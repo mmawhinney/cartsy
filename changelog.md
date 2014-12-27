@@ -27,4 +27,16 @@
 
 * Fixed Predicate
 * Implemented Functionality to Move Items to Fridge list
+
+## V0.2.0
+
+* Refactored code
+* Removed UIViewController extension
+* Made proper CartsyViewController to subclass both views from separately
+* MainList has its own ViewController now
+* Generalized DeleteObject method
+* Re-logicked some function with side-effects
+* Created List Deletion
+* Allowed cascading Item Deletion
 * 
+

@@ -141,7 +141,7 @@ class MetaListViewController: CartsyViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let groceryList = self.storyboard!.instantiateViewControllerWithIdentifier("MainList")! as GroceryListViewController
         if indexPath.section == 0 {
-            groceryList.superList = mainList // TODO: mainList should have a seperate ViewController
+            groceryList.superList = mainList 
         } else {
             groceryList.superList = groceryLists[indexPath.row] // TODO: Make a generalized ItemViewController and subclass it for MainList and Sublists
         }
@@ -159,7 +159,6 @@ class MetaListViewController: CartsyViewController {
     // this is the editing actions, adds a More button. I don't know how to write code for them though.
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
-            
             self.deleteObject(self.groceryLists, atIndexPath: indexPath)
             self.groceryLists = self.fetchLists(self.managedObjectContext!, mainList: false)!
             self.metaListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
