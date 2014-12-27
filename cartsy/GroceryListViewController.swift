@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class GroceryListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class GroceryListViewController: CartsyViewController {
     
     // +++++++++++++++++++++++++++++++++
     // |    MARK: IBOutlets/Actions    |
@@ -33,18 +33,17 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     /// Array of Items to populate tableView
     var tableData = [Item]()
     var superList: List?
-    var mainList: List?
     
     /// our interface to CoreData; who you Fetch from and Save to.
     /// This class's entrypoint to The Context.
-    lazy var managedObjectContext: NSManagedObjectContext? =  {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        if let managedObjectContext = appDelegate.managedObjectContext {
-            return managedObjectContext
-        } else {
-            return nil
-        }
-    }()
+//    lazy var managedObjectContext: NSManagedObjectContext? =  {
+//        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+//        if let managedObjectContext = appDelegate.managedObjectContext {
+//            return managedObjectContext
+//        } else {
+//            return nil
+//        }
+//    }()
     
     // +++++++++++++++++++++++++++++++++++++
     // |    MARK: Boiletplate Overrides    |
@@ -52,7 +51,7 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.fetchItems()
+        tableData = self.fetchItems()!
         mainList = self.fetchLists(self.managedObjectContext!, mainList: true)![0]
     }
     
@@ -72,23 +71,23 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     // |    MARK: Table View Delegate Functions    |
     // +++++++++++++++++++++++++++++++++++++++++++++
 	
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(style: .Default, reuseIdentifier:  "ItemCell")
         let item = tableData[indexPath.row]
         cell.textLabel!.text = item.valueForKey("name") as String?
         return cell
     }
     
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         NSLog("Did select row at index path \(indexPath)") // TODO: make tapping an item do something
         // one thing to do here, would be to for example slide it off, 
         // but leave it blank. Kind of like how reminds in the reminders app don't go away
@@ -99,15 +98,15 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         // this enabled swiping, because why the fuck not.
-        if (editingStyle == .Delete) {
-            self.deleteItem(indexPath)
-        }
     }
     
     // this is the editing actions, adds a More button. I don't know how to write code for them though.
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
-            self.deleteItem(indexPath)
+            self.deleteObject(self.tableData, atIndexPath: indexPath)
+            self.tableData = self.fetchItems()!
+            self.groceryListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            
         });
         var moveRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Move", handler:{action, indexpath in
             self.moveItem(indexPath)
@@ -123,25 +122,11 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
     // |    MARK: Homerolled Functions     |
     // +++++++++++++++++++++++++++++++++++++
     
-    /// deletes swiped item from the list.
-    ///
-    /// :returns: Void. Removes selected item from Core Data and reloads list.
-    func deleteItem(indexPath: NSIndexPath) { // TODO: consider using MGSwipeTableCell to have Mailbox-style swipable thingies.
-        var error : NSError?
-        let item = tableData[indexPath.row]
-        managedObjectContext?.deleteObject(item)
-        if !managedObjectContext!.save(&error) {
-            println("Could not save! \(error)")
-        }
-        self.fetchItems()
-        groceryListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-        
-    }
     
     /// grabs Items to populate TableView from Context
     ///
     /// :returns: Void. fills tableData, used to populate tableView
-    func fetchItems() {                                                     /// TODO: make this return an array of Items that will be asigned to tableData. I don't like methods with side-effects
+    func fetchItems() -> [Item]?{                                                     /// TODO: make this return an array of Items that will be asigned to tableData. I don't like methods with side-effects
         var fetchRequest = NSFetchRequest(entityName: "Item") // grab all
         println("\(superList!.name) has items: \(superList!.toItems)")
         fetchRequest.predicate = NSPredicate(format: "toList = %@", superList!)
@@ -149,9 +134,10 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [Item]
         
         if let results = fetchedResults {
-            tableData = results
+            return results
         } else {
             println("Could not fetch: \(error)")
+            return nil // TODO: instead of crashing, make this error our elegantly
         }
     }
     
@@ -162,7 +148,7 @@ class GroceryListViewController: UIViewController, UITableViewDataSource, UITabl
         item.toList = mainList!
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         appDelegate.saveContext()
-        self.fetchItems() // TODO: figure out why swapping this line and the next one crashes the app on move.
+        tableData = self.fetchItems()! // TODO: figure out why swapping this line and the next one crashes the app on move.
         groceryListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
     }
 

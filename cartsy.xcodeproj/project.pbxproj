@@ -18,7 +18,7 @@
 		4CE108411A4116CF0044794F /* MetaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE108401A4116CF0044794F /* MetaListViewController.swift */; };
 		4CE108431A4116E90044794F /* GroceryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE108421A4116E90044794F /* GroceryListViewController.swift */; };
 		B00B39211A47F7D500471A8F /* String Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00B39201A47F7D500471A8F /* String Extensions.swift */; };
-		B00B39231A47FCE800471A8F /* ViewController Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00B39221A47FCE800471A8F /* ViewController Extensions.swift */; };
+		B0DEB6891A4E11FB00ED1097 /* CartsyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DEB6881A4E11FB00ED1097 /* CartsyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,10 +48,10 @@
 		4CE108401A4116CF0044794F /* MetaListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetaListViewController.swift; sourceTree = "<group>"; };
 		4CE108421A4116E90044794F /* GroceryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListViewController.swift; sourceTree = "<group>"; };
 		B00B39201A47F7D500471A8F /* String Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String Extensions.swift"; sourceTree = "<group>"; };
-		B00B39221A47FCE800471A8F /* ViewController Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController Extensions.swift"; sourceTree = "<group>"; };
 		B07032611A492FC5001A4764 /* cartsy v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "cartsy v4.xcdatamodel"; sourceTree = "<group>"; };
 		B09299221A47944400105B28 /* cartsy v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "cartsy v3.xcdatamodel"; sourceTree = "<group>"; };
 		B09299231A4795A900105B28 /* ignore v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ignore v2.xcdatamodel"; sourceTree = "<group>"; };
+		B0DEB6881A4E11FB00ED1097 /* CartsyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartsyViewController.swift; sourceTree = "<group>"; };
 		B0FD8EF91A46069900A2B33C /* ignore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ignore.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,7 +102,6 @@
 				4CC53CDD1A43D6F5003BAA5C /* Item.swift */,
 				4CC53CDF1A43DC0E003BAA5C /* List.swift */,
 				B00B39201A47F7D500471A8F /* String Extensions.swift */,
-				B00B39221A47FCE800471A8F /* ViewController Extensions.swift */,
 				4CE1081B1A4116770044794F /* Supporting Files */,
 				4CE108441A4116FC0044794F /* ViewControllers */,
 			);
@@ -137,6 +136,7 @@
 		4CE108441A4116FC0044794F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				B0DEB6881A4E11FB00ED1097 /* CartsyViewController.swift */,
 				4CE108401A4116CF0044794F /* MetaListViewController.swift */,
 				4CE108421A4116E90044794F /* GroceryListViewController.swift */,
 			);
@@ -244,12 +244,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CC53CDE1A43D6F5003BAA5C /* Item.swift in Sources */,
-				B00B39231A47FCE800471A8F /* ViewController Extensions.swift in Sources */,
 				4CC53CE41A43E074003BAA5C /* cartsy.xcdatamodeld in Sources */,
 				4CE108431A4116E90044794F /* GroceryListViewController.swift in Sources */,
 				B00B39211A47F7D500471A8F /* String Extensions.swift in Sources */,
 				4CE108411A4116CF0044794F /* MetaListViewController.swift in Sources */,
 				4CE1081E1A4116770044794F /* AppDelegate.swift in Sources */,
+				B0DEB6891A4E11FB00ED1097 /* CartsyViewController.swift in Sources */,
 				4CC53CE01A43DC0E003BAA5C /* List.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

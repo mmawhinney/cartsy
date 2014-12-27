@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 
 
-class MetaListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class MetaListViewController: CartsyViewController {
     
     // +++++++++++++++++++++++++++++++++
     // |    MARK: IBOutlets/Actions    |
@@ -40,14 +40,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        if let persistentStoreCoordinator = appDelegate.persistentStoreCoordinator {
-            return persistentStoreCoordinator
-        } else {
-            return nil
-        }
-    }()
+    
     
     
     // +++++++++++++++++++++++++++
@@ -56,20 +49,28 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     /// Array of Lists to populate tableView
     var groceryLists = [List]()
-    var mainList = List?()
+//    override var mainList = List?()
     
-    
-    
-    /// Our interface to the Core Data; who you Fetch from and Save to.
-    /// This class's entrypoint to The Context.
-    lazy var managedObjectContext: NSManagedObjectContext? =  {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate     // select our app delegate
-        if let managedObjectContext = appDelegate.managedObjectContext {                // this was created in AppDelegate as part of CoreData boilerplate
-            return managedObjectContext
-        } else {
-            return nil
-        }
-    }()
+//    /// Manages Save Files
+//    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+//        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+//        if let persistentStoreCoordinator = appDelegate.persistentStoreCoordinator {
+//            return persistentStoreCoordinator
+//        } else {
+//            return nil
+//        }
+//        }()
+//    
+//    /// Our interface to the Core Data; who you Fetch from and Save to.
+//    /// This class's entrypoint to The Context.
+//    lazy var managedObjectContext: NSManagedObjectContext? =  {
+//        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate     // select our app delegate
+//        if let managedObjectContext = appDelegate.managedObjectContext {                // this was created in AppDelegate as part of CoreData boilerplate
+//            return managedObjectContext
+//        } else {
+//            return nil
+//        }
+//    }()
     
     // +++++++++++++++++++++++++++++++++++++
     // |    MARK: Boiletplate Overrides    |
@@ -82,13 +83,12 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        println("Made it!")
 //        self.fetchLists()
         groceryLists = fetchLists(self.managedObjectContext!)!
         if (groceryLists.isEmpty) {
             self.generateDefaults()
         }
-        mainList = self.fetchLists(self.managedObjectContext!, mainList: true)![0]
+        self.mainList = self.fetchLists(self.managedObjectContext!, mainList: true)![0]
     }
     
     override func viewDidLoad() {
@@ -102,7 +102,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     // |    MARK: Table View Delegate Functions    |
     // +++++++++++++++++++++++++++++++++++++++++++++
     
-    func tableView(tableView: UITableView, numberOfRowsInSection: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection: Int) -> Int {
         if numberOfRowsInSection == 0 { // numberOfRowsInSection specifies WHICH section we're in
             return 1
         } else {
@@ -110,11 +110,11 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2 // hardcoded for now
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(style: .Default, reuseIdentifier: "ListCell")
         cell.accessoryType = .DisclosureIndicator
         
@@ -129,9 +129,15 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        // this enabled swiping, because why the fuck not.
+        self.deleteObject(groceryLists, atIndexPath: indexPath)
+        self.fetchLists(self.managedObjectContext!, mainList: false)
+    }
+    
     /// Navigates to subList selected
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        NSLog("Did select row at index path \(indexPath.row) in section \(indexPath.section)")
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        NSLog("Did select row \(indexPath.row) in section \(indexPath.section)")
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let groceryList = self.storyboard!.instantiateViewControllerWithIdentifier("MainList")! as GroceryListViewController
         if indexPath.section == 0 {
@@ -141,6 +147,25 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         groceryList.mainList = mainList
         self.navigationController?.pushViewController(groceryList, animated: true)
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if (indexPath.section == 0 || groceryLists.count == 1) {
+            return false
+        }
+        return true
+    }
+    
+    // this is the editing actions, adds a More button. I don't know how to write code for them though.
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
+            
+            self.deleteObject(self.groceryLists, atIndexPath: indexPath)
+            self.groceryLists = self.fetchLists(self.managedObjectContext!, mainList: false)!
+            self.metaListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        });
+        
+        return [deleteRowAction];
     }
     
     
@@ -164,7 +189,6 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
     // +++++++++++++++++++++++++++++++++++++
     // |    MARK: Homerolled Functions     |
     // +++++++++++++++++++++++++++++++++++++
-    
     
     /// Generate our two base lists and link them
     func generateDefaults() -> Void {
@@ -211,12 +235,6 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         self.metaListTable.reloadData()
     }
     
-    /// present a UIView Overlay to pick which list to be Conjugal
-    func pickConjugal(list: List) -> Void {
-        /// TODO: when we decide how we want to handle conjugates, fill this in
-        list.toConjugalList = mainList! // TODO: allow other conjugal lists?
-        }
-    
     /// saves a List in Context
     ///
     /// :returns: Void. CoreData will save List in PersistentStore
@@ -225,8 +243,7 @@ class MetaListViewController: UIViewController, UITableViewDataSource, UITableVi
         let list = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: self.managedObjectContext!) as List
         list.name = name
         println("List name: \(list.name)")
-        self.pickConjugal(list)
-        // list.toConjugalList = list              /// TODO: ask, in a dialog, what list to join with
+        list.toConjugalList = mainList!        // list.toConjugalList = list              /// TODO: ask, in a dialog, what list to join with
                                                 /// TODO: Decide if we want to be able to join to only one list, or to many
         println("Twin list: \(list.toConjugalList.name)")
         
