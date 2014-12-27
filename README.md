@@ -4,7 +4,7 @@ Cartsy
 Cartsy is an app that allows quick management of what's in the fridge and what's on the shopping list. 
 Sync with other members of the household, barcode scanning and ???
 
-## TODO Short-term
+## TODO #1 Short-term
 
 ### MetaList
 * query db for list of lists
