@@ -48,6 +48,7 @@
 		4CE108401A4116CF0044794F /* MetaListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetaListViewController.swift; sourceTree = "<group>"; };
 		4CE108421A4116E90044794F /* GroceryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListViewController.swift; sourceTree = "<group>"; };
 		B00B39201A47F7D500471A8F /* String Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String Extensions.swift"; sourceTree = "<group>"; };
+		B06D83991A4F2E26009D6827 /* cartsy v5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "cartsy v5.xcdatamodel"; sourceTree = "<group>"; };
 		B07032611A492FC5001A4764 /* cartsy v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "cartsy v4.xcdatamodel"; sourceTree = "<group>"; };
 		B09299221A47944400105B28 /* cartsy v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "cartsy v3.xcdatamodel"; sourceTree = "<group>"; };
 		B09299231A4795A900105B28 /* ignore v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ignore v2.xcdatamodel"; sourceTree = "<group>"; };
@@ -468,11 +469,12 @@
 				4CC53CE51A43E15E003BAA5C /* cartsy v2.xcdatamodel */,
 				B09299221A47944400105B28 /* cartsy v3.xcdatamodel */,
 				B07032611A492FC5001A4764 /* cartsy v4.xcdatamodel */,
+				B06D83991A4F2E26009D6827 /* cartsy v5.xcdatamodel */,
 				B09299231A4795A900105B28 /* ignore v2.xcdatamodel */,
 				B0FD8EF91A46069900A2B33C /* ignore.xcdatamodel */,
 				4CC53CE31A43E074003BAA5C /* cartsy.xcdatamodel */,
 			);
-			currentVersion = B07032611A492FC5001A4764 /* cartsy v4.xcdatamodel */;
+			currentVersion = B06D83991A4F2E26009D6827 /* cartsy v5.xcdatamodel */;
 			path = cartsy.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

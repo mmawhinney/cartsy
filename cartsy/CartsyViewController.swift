@@ -101,7 +101,7 @@ class CartsyViewController: UIViewController, UITableViewDataSource, UITableView
             if name.isEmpty == false {
                 savedAs(name)
             } else {
-                println("we fucked up, empty string!") /// TODO: give a proper dialog saying not to save bullshit
+                println("we fucked up, empty string!") /// TODO: give a proper dialog saying not to save bullshit.
             }
             inTable.reloadData()
         }
@@ -120,7 +120,7 @@ class CartsyViewController: UIViewController, UITableViewDataSource, UITableView
         var error : NSError?
         var object = fromArray[atIndexPath.row] as NSManagedObject
         
-        managedObjectContext?.deleteObject(object)
+        managedObjectContext?.deleteObject(object) // TODO: what if it doesn't save properly?
         if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")
         }
@@ -133,7 +133,7 @@ class CartsyViewController: UIViewController, UITableViewDataSource, UITableView
     /// :returns: Optional Array of Lists. If no lists were fetched we may return a nil. This must be handled properly.
     func fetchLists(managedObjectContext: NSManagedObjectContext, mainList: Bool = false) -> [List]? { // TODO: if we couldn't fetch results, think of an elegant way of recovering instead of unwrapping a nil as we do currently
         let fetchRequest = NSFetchRequest(entityName: "List") // want all lists
-        fetchRequest.predicate = NSPredicate(format: "isParent = %@", mainList)
+        fetchRequest.predicate = NSPredicate(format: "isMain = %@", mainList)
         var error: NSError?
         let fetchedResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as? [List] // fetch Lists from Context
         

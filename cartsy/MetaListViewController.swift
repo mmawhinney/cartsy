@@ -173,11 +173,8 @@ class MetaListViewController: CartsyViewController {
         let fridgeList = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: self.managedObjectContext!) as List
         var error : NSError?
         fridgeList.name = "Fridge"
-        fridgeList.toConjugalList = groceryList
-        fridgeList.isParent = true
+        fridgeList.isMain = true
         mainList = fridgeList
-        println("Grocery list conjugal is: \(groceryList.toConjugalList.name) and")
-        println("Fridge list conjugal is \(fridgeList.toConjugalList.name)")
         if !managedObjectContext!.save(&error) {
             println("Could not Save!")
         } else {
@@ -219,9 +216,7 @@ class MetaListViewController: CartsyViewController {
         let list = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: self.managedObjectContext!) as List
         list.name = name
         println("List name: \(list.name)")
-        list.toConjugalList = mainList!        // list.toConjugalList = list              /// TODO: ask, in a dialog, what list to join with
                                                 /// TODO: Decide if we want to be able to join to only one list, or to many
-        println("Twin list: \(list.toConjugalList.name)")
         
         if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")

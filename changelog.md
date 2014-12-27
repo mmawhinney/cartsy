@@ -38,5 +38,6 @@
 * Re-logicked some function with side-effects
 * Created List Deletion
 * Allowed cascading Item Deletion
+* Disallowed removing Fridge and one other List
 * 
 
