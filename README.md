@@ -14,7 +14,7 @@ Sync with other members of the household, barcode scanning and ???
 * transition to MainList, populate TableView by querying database again and 
 * perhaps have two hard-coded lists: GroceryList and FridgeList, maybe **just** start with these
 
-## TODO Long-term
+## TODO #2 Long-term
 
 ### Skeleton
 * allowing addition of cells
