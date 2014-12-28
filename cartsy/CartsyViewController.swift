@@ -27,7 +27,7 @@ class CartsyViewController: UIViewController, UITableViewDataSource, UITableView
     // |    MARK: Our Objects    |
     // +++++++++++++++++++++++++++
     
-    /// Array of Lists to populate tableView
+    /// Our Main List: The Fridge
     var mainList = List?()
     
     /// Manages Save Files
@@ -91,7 +91,7 @@ class CartsyViewController: UIViewController, UITableViewDataSource, UITableView
     /// :param: savedAs Save function for this type so that we can handle Lists and Items differents
     ///
     /// :returns: Void. Calls savedAs function and reloads view.
-    func addNewPressed(#object: String, inTable: UITableView, savedAs: (String) -> Void) { /// TODO: try to make an optional closure at the end, should we need it
+    func addNewPressed(#object: String, inTable: UITableView, savedAs: (String) -> Void) {
         // make alert with a save/cancel dialogue
         var alert = UIAlertController(title: "Add", message: "Add new \(object)", preferredStyle: .Alert)
         let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in

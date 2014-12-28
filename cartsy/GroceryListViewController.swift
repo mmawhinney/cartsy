@@ -116,9 +116,9 @@ class GroceryListViewController: CartsyViewController {
     /// grabs Items to populate TableView from Context
     ///
     /// :returns: Void. fills tableData, used to populate tableView
-    func fetchItems() -> [Item]?{                                                     /// TODO: make this return an array of Items that will be asigned to tableData. I don't like methods with side-effects
+    func fetchItems() -> [Item]?{
         var fetchRequest = NSFetchRequest(entityName: "Item") // grab all
-        println("\(superList!.name) has items: \(superList!.toItems)")
+//        println("\(superList!.name) has items: \(superList!.toItems)")
         fetchRequest.predicate = NSPredicate(format: "toList = %@", superList!)
         var error : NSError?
         let fetchedResults = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [Item]
@@ -149,8 +149,8 @@ class GroceryListViewController: CartsyViewController {
         var error : NSError?
         let item = NSEntityDescription.insertNewObjectForEntityForName("Item", inManagedObjectContext: managedObjectContext!) as Item
         item.name = name
-        superList!.addItem(item)        // TODO: maybe remove this Side-Effect
-        println("List toItem \(superList!.toItems)")
+        item.toList = superList!     
+        
         if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")
         } else {

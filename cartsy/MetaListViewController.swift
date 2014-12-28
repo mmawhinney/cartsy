@@ -28,7 +28,7 @@ class MetaListViewController: CartsyViewController {
     }
     
     /// Resets all lists and items
-    @IBAction func resetData(sender: AnyObject) { // TODO: at the end call a regenerator to return app to default state: Grocery List and Fridge List
+    @IBAction func resetData(sender: AnyObject) {
         var alert = UIAlertController(title: "Reset All Data", message: "This will remove all lists and items.\n Are you sure?", preferredStyle: .Alert)
         let acceptAction = UIAlertAction(title: "Delete!", style: .Default) {(action: UIAlertAction!) -> Void in
             self.resetAllData()
@@ -60,7 +60,6 @@ class MetaListViewController: CartsyViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-//        self.fetchLists()
         groceryLists = fetchLists(self.managedObjectContext!)!
         if (groceryLists.isEmpty) {
             self.generateDefaults()
@@ -80,7 +79,7 @@ class MetaListViewController: CartsyViewController {
     // +++++++++++++++++++++++++++++++++++++++++++++
     
     override func tableView(tableView: UITableView, numberOfRowsInSection: Int) -> Int {
-        if numberOfRowsInSection == 0 { // numberOfRowsInSection specifies WHICH section we're in
+        if numberOfRowsInSection == 0 {
             return 1
         } else {
             return groceryLists.count
@@ -120,7 +119,7 @@ class MetaListViewController: CartsyViewController {
         if indexPath.section == 0 {
             groceryList.superList = mainList 
         } else {
-            groceryList.superList = groceryLists[indexPath.row] // TODO: Make a generalized ItemViewController and subclass it for MainList and Sublists
+            groceryList.superList = groceryLists[indexPath.row]
         }
         groceryList.mainList = mainList
         self.navigationController?.pushViewController(groceryList, animated: true)
@@ -216,7 +215,6 @@ class MetaListViewController: CartsyViewController {
         let list = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: self.managedObjectContext!) as List
         list.name = name
         println("List name: \(list.name)")
-                                                /// TODO: Decide if we want to be able to join to only one list, or to many
         
         if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")
