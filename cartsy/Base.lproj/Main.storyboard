@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6724" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ncr-RC-Zoy">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Meta List View Controller-->
@@ -21,12 +22,12 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="6da-9s-CjT" secondAttribute="trailing" id="1Xa-SR-Ojj"/>
-                            <constraint firstItem="6da-9s-CjT" firstAttribute="top" secondItem="avR-BE-NqD" secondAttribute="top" id="JXN-8D-cI2"/>
                             <constraint firstItem="6da-9s-CjT" firstAttribute="leading" secondItem="avR-BE-NqD" secondAttribute="leading" id="Yqz-DP-PUs"/>
                             <constraint firstItem="6da-9s-CjT" firstAttribute="bottom" secondItem="vKl-GN-62B" secondAttribute="top" id="eah-va-aLV"/>
+                            <constraint firstItem="6da-9s-CjT" firstAttribute="top" secondItem="tcR-G2-Neb" secondAttribute="bottom" constant="-64" id="eax-FL-26j"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="A26-Yg-A7t">
@@ -43,40 +44,52 @@
                     </navigationItem>
                     <connections>
                         <outlet property="metaListTable" destination="6da-9s-CjT" id="1Eh-U3-XhF"/>
-                        <segue destination="MCw-5L-ag0" kind="push" identifier="toGroceryList" id="ai0-2P-3s6"/>
+                        <segue destination="d8i-Ty-YGp" kind="push" identifier="toGroceryList" id="GLx-XG-F08"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0mR-35-aSd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="366.93333333333334" y="262.22666666666669"/>
+            <point key="canvasLocation" x="342" y="262"/>
         </scene>
         <!--Grocery List View Controller-->
-        <scene sceneID="KUa-yE-ooj">
+        <scene sceneID="QfX-6e-skT">
             <objects>
-                <tableViewController storyboardIdentifier="MainList" id="MCw-5L-ag0" customClass="GroceryListViewController" customModule="cartsy" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Vwo-8m-p2z">
+                <viewController storyboardIdentifier="MainList" id="d8i-Ty-YGp" customClass="GroceryListViewController" customModule="cartsy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bQR-sR-6DW"/>
+                        <viewControllerLayoutGuide type="bottom" id="bNX-2E-fFb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ywC-L4-erL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Fa1-aG-bRd">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="MCw-5L-ag0" id="rKQ-8f-JNf"/>
-                            <outlet property="delegate" destination="MCw-5L-ag0" id="mA9-of-9bj"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="uOi-vb-2ld">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="J78-Tz-SMu">
+                        <constraints>
+                            <constraint firstItem="Fa1-aG-bRd" firstAttribute="leading" secondItem="ywC-L4-erL" secondAttribute="leadingMargin" constant="-16" id="G3U-nM-dnW"/>
+                            <constraint firstItem="Fa1-aG-bRd" firstAttribute="top" secondItem="bQR-sR-6DW" secondAttribute="bottom" constant="-64" id="Iew-gF-Zke"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Fa1-aG-bRd" secondAttribute="trailing" constant="-16" id="SeS-hv-yad"/>
+                            <constraint firstItem="bNX-2E-fFb" firstAttribute="top" secondItem="Fa1-aG-bRd" secondAttribute="bottom" id="loA-IS-LK3"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="zhL-s6-AcR">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="xEQ-OM-WjX">
                             <connections>
-                                <action selector="addNewItem:" destination="MCw-5L-ag0" id="NSI-sG-Mvf"/>
+                                <action selector="addNewItem:" destination="d8i-Ty-YGp" id="gcB-sO-iSg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="groceryListTable" destination="Vwo-8m-p2z" id="MBt-J1-SWn"/>
+                        <outlet property="groceryListTable" destination="Fa1-aG-bRd" id="4Bs-VE-EBq"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gMp-90-yqf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="In0-wm-dbx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="761" y="262"/>
+            <point key="canvasLocation" x="758" y="262"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hSD-Xx-IF0">
