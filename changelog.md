@@ -40,3 +40,7 @@
 * Allowed cascading Item Deletion
 * Disallowed removing Fridge and one other List
 
+## V0.2.1
+
+* added user-feedback when input is invalid (blank)
+* nested GroceryList TableView in a View so we don't have ugly black on shake
