@@ -103,26 +103,7 @@ class CartsyViewController: UIViewController, UITableViewDataSource, UITableView
             if name.isEmpty == false {
                 savedAs(name)
             } else {
-                println("we messed up, empty string!") /// TODO: give a proper dialog saying not to save bullshit.
-                let anim = CAKeyframeAnimation(keyPath: "transform")
-                let x: CGFloat = 5
-                let y: CGFloat = 0.0
-                let z: CGFloat = 0.0
-                anim.values = [NSValue(CATransform3D:CATransform3DMakeTranslation(-x, -y, -z)), NSValue(CATransform3D:CATransform3DMakeTranslation(x, y, z))]
-                anim.autoreverses = true
-                anim.repeatCount = 2.0
-                anim.duration = 0.07
-                inTable.layer.addAnimation(anim, forKey: nil)
-                // -----------------------------------
-//                let animator = UIDynamicAnimator(referenceView: self.view)
-//                let attachment = UIAttachmentBehavior(item: inTable, attachedToAnchor:  inTable.center)
-//                attachment.damping = 0.5
-//                attachment.frequency = 5
-//                animator.addBehavior(attachment)
-//                let push = UIPushBehavior(items: [inTable], mode: UIPushBehaviorMode.Instantaneous)
-//                push.pushDirection = CGVectorMake(100, 100)
-//                animator.addBehavior(push)
-//                println("Animation complete :(")
+                self.shakeView(inTable)
             }
             inTable.reloadData()
         }
@@ -165,6 +146,21 @@ class CartsyViewController: UIViewController, UITableViewDataSource, UITableView
             println("Could not fetch: \(error)")
             return nil
         }
+    }
+    
+    /// Shakes given UIView or subclass
+    ///
+    /// :param: view UITableView, UIView etc., view to shake.
+    func shakeView(view: UIView) -> Void {
+        let anim = CAKeyframeAnimation(keyPath: "transform")
+        let x: CGFloat = 5
+        let y: CGFloat = 0.0
+        let z: CGFloat = 0.0
+        anim.values = [NSValue(CATransform3D:CATransform3DMakeTranslation(-x, -y, -z)), NSValue(CATransform3D:CATransform3DMakeTranslation(x, y, z))]
+        anim.autoreverses = true
+        anim.repeatCount = 2.0
+        anim.duration = 0.07
+        view.layer.addAnimation(anim, forKey: nil)
     }
 
 }
