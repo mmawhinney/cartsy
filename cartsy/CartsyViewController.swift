@@ -125,6 +125,7 @@ class CartsyViewController: UIViewController, UITableViewDataSource, UITableView
         managedObjectContext?.deleteObject(object) // TODO: what if it doesn't save properly?
         if !managedObjectContext!.save(&error) {
             println("Could not save! \(error)")
+            self.deleteError()
         }
     }
     
@@ -144,7 +145,8 @@ class CartsyViewController: UIViewController, UITableViewDataSource, UITableView
             return results
         } else {
             println("Could not fetch: \(error)")
-            return nil
+            self.fetchListsError()
+            return []
         }
     }
     
@@ -162,5 +164,30 @@ class CartsyViewController: UIViewController, UITableViewDataSource, UITableView
         anim.duration = 0.07
         view.layer.addAnimation(anim, forKey: nil)
     }
+    
+    func deleteError() {
+        var alert = UIAlertController(title: "Internal Error", message: "We couldn't delete that", preferredStyle: .Alert)
+        let acceptance = UIAlertAction(title: "Okay", style: .Default, handler: { (action: UIAlertAction!) -> Void in
+            // do nothing
+        })
+        alert.addAction(acceptance)
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func fetchListsError() {
+        var alert = UIAlertController(title: "Sorry!", message: "Couldn't fetch data", preferredStyle: .Alert)
+        let acceptance  = UIAlertAction(title: "Okay", style: .Default, handler: nil)
+        alert.addAction(acceptance)
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 }

@@ -134,12 +134,40 @@ class GroceryListViewController: CartsyViewController {
     /// moves an Item to the Fridge. Only works from shopping lists
     func moveItem(indexPath: NSIndexPath) { // TODO: does not work from Fridge! We'll need a picker of some kind when moving from the fridge
         let item = tableData[indexPath.row]
-        println("Moving item from \(item.toList.name)")
-        item.toList = mainList!
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        appDelegate.saveContext()
-        tableData = self.fetchItems()! // TODO: figure out why swapping this line and the next one crashes the app on move.
-        groceryListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        println("Moving item from \(item.toList.name) to \(mainList!.name)")
+        // we are in the fridge
+        if (item.toList.isMain) {
+            // present view
+            let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+            let blurView = UIVisualEffectView(effect: blur)
+            blurView.frame = self.groceryListTable.frame
+            blurView.alpha = 0.0
+            self.view.addSubview(blurView)
+            UIView.animateWithDuration(0.25, animations: { () -> Void in
+                blurView.alpha = 1
+            })
+            
+//            UIView.animateWithDuration(0.25, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+//                blurView.alpha = 0.0
+//                }, completion: { (finished: Bool) -> Void in
+//                    UIView.animateWithDuration(0.25, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+//                        blurView.alpha = 1.0
+//                    }, completion: nil)
+//            })
+            // show lists
+            
+            // pick a list
+            // move to that list
+        } else { // else move item to Fridge
+            item.toList = mainList!
+            var error: NSError?
+            if !self.managedObjectContext!.save(&error) {
+                "Error saving: \(error)"
+            } else {
+                tableData = self.fetchItems()! // TODO: figure out why swapping this line and the next one crashes the app on move.
+                groceryListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            }
+        }
     }
 
     /// saves an Item into the Context
