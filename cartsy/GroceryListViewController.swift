@@ -131,6 +131,12 @@ class GroceryListViewController: CartsyViewController {
         }
     }
     
+    func removeTopView() {
+        println("closure worked!")
+        self.view.subviews.last?.removeFromSuperview()
+        groceryListTable.reloadData()
+    }
+    
     /// moves an Item to the Fridge. Only works from shopping lists
     func moveItem(indexPath: NSIndexPath) { // TODO: does not work from Fridge! We'll need a picker of some kind when moving from the fridge
         let item = tableData[indexPath.row]
@@ -143,9 +149,15 @@ class GroceryListViewController: CartsyViewController {
             blurView.frame = self.groceryListTable.frame
             blurView.alpha = 0.0
             self.view.addSubview(blurView)
+            
+            
             UIView.animateWithDuration(0.25, animations: { () -> Void in
                 blurView.alpha = 1
+                let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Done, target: self, action: "removeTopView")
+                self.navigationItem.leftBarButtonItem = cancelButton as UIBarButtonItem
+                self.navigationItem.rightBarButtonItem = nil
             })
+            
             
 //            UIView.animateWithDuration(0.25, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
 //                blurView.alpha = 0.0

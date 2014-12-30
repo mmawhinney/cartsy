@@ -91,10 +91,10 @@
             </objects>
             <point key="canvasLocation" x="758" y="262"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Root View Controller-->
         <scene sceneID="hSD-Xx-IF0">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ncr-RC-Zoy" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ncr-RC-Zoy" customClass="RootViewController" customModule="cartsy" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XEB-aR-FsJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
