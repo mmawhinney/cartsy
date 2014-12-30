@@ -33,7 +33,10 @@ class GroceryListViewController: CartsyViewController {
     /// Array of Items to populate tableView
     var tableData = [Item]()
     var superList: List?
-    
+    var resetButton: UIBarButtonItem?
+    var addButton:   UIBarButtonItem?
+    var itemToMove: Item?
+    var selectedRows = [NSIndexPath]()
     
     // +++++++++++++++++++++++++++++++++++++
     // |    MARK: Boiletplate Overrides    |
@@ -49,6 +52,8 @@ class GroceryListViewController: CartsyViewController {
         super.viewDidLoad()
         self.title = superList!.name
         self.setupItemTable()
+        self.resetButton = self.navigationItem.leftBarButtonItem
+        self.addButton   = self.navigationItem.rightBarButtonItem
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,13 +67,14 @@ class GroceryListViewController: CartsyViewController {
     // +++++++++++++++++++++++++++++++++++++++++++++
 	
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        println("number of rows in section: \(tableData.count)")
         return tableData.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(style: .Default, reuseIdentifier:  "ItemCell")
         let item = tableData[indexPath.row]
-        cell.textLabel!.text = item.valueForKey("name") as String?
+        cell.textLabel!.text = item.valueForKey("name") as String!
         return cell
     }
     
@@ -99,6 +105,7 @@ class GroceryListViewController: CartsyViewController {
             
         });
         var moveRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Move", handler:{action, indexpath in
+            self.selectedRows.append(indexPath)
             self.moveItem(indexPath)
         });
     
@@ -131,10 +138,60 @@ class GroceryListViewController: CartsyViewController {
         }
     }
     
-    func removeTopView() {
-        println("closure worked!")
-        self.view.subviews.last?.removeFromSuperview()
-        groceryListTable.reloadData()
+    
+    /// removes top view. // TODO: this function is broke as fuck
+    func removeMoveView() {
+        let moveTableView = self.view.subviews.last? as UIView
+        let subViewCount  = self.view.subviews.count
+        let blurView      = self.view.subviews[subViewCount-2] as UIView
+        
+        UIView.animateWithDuration(0.4, animations: { () -> Void in
+            self.navigationItem.leftBarButtonItem  = self.resetButton
+            self.navigationItem.rightBarButtonItem = self.addButton
+            blurView.alpha = 0.0
+            moveTableView.alpha = 0.0
+        }, completion: {(done: Bool) -> Void in
+            moveTableView.removeFromSuperview()
+            blurView.removeFromSuperview()
+        })
+        for index in self.selectedRows {
+            println("Selected Index: \(index.row)")
+            self.groceryListTable.deselectRowAtIndexPath(index, animated: true)
+            self.tableData = self.fetchItems()!
+            self.groceryListTable.deleteRowsAtIndexPaths(selectedRows, withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
+    }
+    
+    func completedMove(indexPath: NSIndexPath) {
+        let lists = self.fetchLists(self.managedObjectContext!, mainList: false)
+        itemToMove!.toList = lists![indexPath.row]
+        var error: NSError?
+        if !managedObjectContext!.save(&error) {
+            println("Could not save! \(error)")
+            self.shakeView(self.view)
+        }
+        self.removeMoveView()
+    }
+    
+    func presentMoveViewController() {
+//        present view
+        let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+        let blurView = UIVisualEffectView(effect: blur)
+        blurView.frame = self.groceryListTable.frame
+        blurView.alpha = 0.0
+        self.view.addSubview(blurView)
+        let moveToTableViewController = MoveToTableViewController()
+        moveToTableViewController.tableData = self.fetchLists(managedObjectContext!)!
+        UIView.animateWithDuration(0.4, animations: { () -> Void in
+            blurView.alpha = 1.0
+            self.addChildViewController(moveToTableViewController)
+            self.view.addSubview(moveToTableViewController.view)
+            let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Done, target: self, action: "removeMoveView")
+            let doneButton   = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: "completedMove:")
+            self.navigationItem.leftBarButtonItem  = cancelButton as UIBarButtonItem
+            self.navigationItem.rightBarButtonItem = doneButton   as UIBarButtonItem
+        })
+
     }
     
     /// moves an Item to the Fridge. Only works from shopping lists
@@ -143,34 +200,10 @@ class GroceryListViewController: CartsyViewController {
         println("Moving item from \(item.toList.name) to \(mainList!.name)")
         // we are in the fridge
         if (item.toList.isMain) {
-            // present view
-            let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-            let blurView = UIVisualEffectView(effect: blur)
-            blurView.frame = self.groceryListTable.frame
-            blurView.alpha = 0.0
-            self.view.addSubview(blurView)
-            
-            
-            UIView.animateWithDuration(0.25, animations: { () -> Void in
-                blurView.alpha = 1
-                let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Done, target: self, action: "removeTopView")
-                self.navigationItem.leftBarButtonItem = cancelButton as UIBarButtonItem
-                self.navigationItem.rightBarButtonItem = nil
-            })
-            
-            
-//            UIView.animateWithDuration(0.25, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
-//                blurView.alpha = 0.0
-//                }, completion: { (finished: Bool) -> Void in
-//                    UIView.animateWithDuration(0.25, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-//                        blurView.alpha = 1.0
-//                    }, completion: nil)
-//            })
-            // show lists
-            
-            // pick a list
-            // move to that list
-        } else { // else move item to Fridge
+            self.itemToMove = tableData[indexPath.row]
+            self.presentMoveViewController()
+        // else move item to Fridge
+        } else {
             item.toList = mainList!
             var error: NSError?
             if !self.managedObjectContext!.save(&error) {

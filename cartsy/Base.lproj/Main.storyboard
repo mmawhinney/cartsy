@@ -68,7 +68,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Fa1-aG-bRd" firstAttribute="leading" secondItem="ywC-L4-erL" secondAttribute="leadingMargin" constant="-16" id="G3U-nM-dnW"/>
                             <constraint firstItem="Fa1-aG-bRd" firstAttribute="top" secondItem="bQR-sR-6DW" secondAttribute="bottom" constant="-64" id="Iew-gF-Zke"/>
@@ -91,10 +91,10 @@
             </objects>
             <point key="canvasLocation" x="758" y="262"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="hSD-Xx-IF0">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ncr-RC-Zoy" customClass="RootViewController" customModule="cartsy" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ncr-RC-Zoy" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XEB-aR-FsJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

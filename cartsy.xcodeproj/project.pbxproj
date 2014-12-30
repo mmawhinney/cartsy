@@ -19,8 +19,7 @@
 		4CE108431A4116E90044794F /* GroceryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE108421A4116E90044794F /* GroceryListViewController.swift */; };
 		B00B39211A47F7D500471A8F /* String Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00B39201A47F7D500471A8F /* String Extensions.swift */; };
 		B0DEB6891A4E11FB00ED1097 /* CartsyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DEB6881A4E11FB00ED1097 /* CartsyViewController.swift */; };
-		B0F495C11A521D17006D6167 /* MoveToTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F495C01A521D17006D6167 /* MoveToTableViewController.swift */; };
-		B0F495C31A52535E006D6167 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F495C21A52535E006D6167 /* RootViewController.swift */; };
+		B0E861801A5278110059B758 /* MoveToTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E8617F1A5278110059B758 /* MoveToTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,8 +54,7 @@
 		B09299221A47944400105B28 /* cartsy v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "cartsy v3.xcdatamodel"; sourceTree = "<group>"; };
 		B09299231A4795A900105B28 /* ignore v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ignore v2.xcdatamodel"; sourceTree = "<group>"; };
 		B0DEB6881A4E11FB00ED1097 /* CartsyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartsyViewController.swift; sourceTree = "<group>"; };
-		B0F495C01A521D17006D6167 /* MoveToTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveToTableViewController.swift; sourceTree = "<group>"; };
-		B0F495C21A52535E006D6167 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		B0E8617F1A5278110059B758 /* MoveToTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveToTableViewController.swift; sourceTree = "<group>"; };
 		B0FD8EF91A46069900A2B33C /* ignore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ignore.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,11 +139,10 @@
 		4CE108441A4116FC0044794F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				B0F495C21A52535E006D6167 /* RootViewController.swift */,
 				B0DEB6881A4E11FB00ED1097 /* CartsyViewController.swift */,
 				4CE108401A4116CF0044794F /* MetaListViewController.swift */,
 				4CE108421A4116E90044794F /* GroceryListViewController.swift */,
-				B0F495C01A521D17006D6167 /* MoveToTableViewController.swift */,
+				B0E8617F1A5278110059B758 /* MoveToTableViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -250,7 +247,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0F495C31A52535E006D6167 /* RootViewController.swift in Sources */,
 				4CC53CDE1A43D6F5003BAA5C /* Item.swift in Sources */,
 				4CC53CE41A43E074003BAA5C /* cartsy.xcdatamodeld in Sources */,
 				4CE108431A4116E90044794F /* GroceryListViewController.swift in Sources */,
@@ -258,7 +254,7 @@
 				4CE108411A4116CF0044794F /* MetaListViewController.swift in Sources */,
 				4CE1081E1A4116770044794F /* AppDelegate.swift in Sources */,
 				B0DEB6891A4E11FB00ED1097 /* CartsyViewController.swift in Sources */,
-				B0F495C11A521D17006D6167 /* MoveToTableViewController.swift in Sources */,
+				B0E861801A5278110059B758 /* MoveToTableViewController.swift in Sources */,
 				4CC53CE01A43DC0E003BAA5C /* List.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
