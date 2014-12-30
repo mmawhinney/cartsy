@@ -156,9 +156,9 @@ class GroceryListViewController: CartsyViewController {
         })
         for index in self.selectedRows {
             println("Selected Index: \(index.row)")
-            self.groceryListTable.deselectRowAtIndexPath(index, animated: true)
             self.tableData = self.fetchItems()!
             self.groceryListTable.deleteRowsAtIndexPaths(selectedRows, withRowAnimation: UITableViewRowAnimation.Automatic)
+            self.selectedRows.removeAll(keepCapacity: false)
         }
     }
     
@@ -191,7 +191,6 @@ class GroceryListViewController: CartsyViewController {
             self.navigationItem.leftBarButtonItem  = cancelButton as UIBarButtonItem
             self.navigationItem.rightBarButtonItem = doneButton   as UIBarButtonItem
         })
-
     }
     
     /// moves an Item to the Fridge. Only works from shopping lists
