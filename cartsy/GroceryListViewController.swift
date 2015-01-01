@@ -46,6 +46,7 @@ class GroceryListViewController: CartsyViewController {
         super.viewWillAppear(animated)
         tableData = self.fetchItems()!
         mainList = self.fetchLists(self.managedObjectContext!, mainList: true)![0]
+        println("we have enough space for \(selectedRows.count) selections")
     }
     
     override func viewDidLoad() {
@@ -84,12 +85,18 @@ class GroceryListViewController: CartsyViewController {
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        NSLog("Did select row at index path \(indexPath)") // TODO: make tapping an item do something
+        NSLog("Did select row at index path \(indexPath.row)") // TODO: make tapping an item do something
         // one thing to do here, would be to for example slide it off, 
         // but leave it blank. Kind of like how reminds in the reminders app don't go away
         // until you close the app. So you can still revert your choice
         // if we do swiping, for example, going to other list can draw it blue (like Mailbox)
         // and removing it can make it red. Just throwing out some ideas
+        var cell = groceryListTable.cellForRowAtIndexPath(indexPath)
+        if (cell!.accessoryType == UITableViewCellAccessoryType.Checkmark) {
+            cell!.accessoryType = UITableViewCellAccessoryType.None
+        } else {
+            cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
+        }
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -102,7 +109,6 @@ class GroceryListViewController: CartsyViewController {
             self.deleteObject(self.tableData, atIndexPath: indexPath)
             self.tableData = self.fetchItems()!
             self.groceryListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-            
         });
         var moveRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Move", handler:{action, indexpath in
             self.selectedRows.append(indexPath)
