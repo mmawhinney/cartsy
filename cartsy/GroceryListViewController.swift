@@ -73,9 +73,25 @@ class GroceryListViewController: CartsyViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell(style: .Default, reuseIdentifier:  "ItemCell")
+//        let cell: UITableViewCell = UITableViewCell(style: .Default, reuseIdentifier:  "ItemCell")
+        let cell = MCSwipeTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "ItemCell")
+        cell.selectionStyle = UITableViewCellSelectionStyle.Blue
         let item = tableData[indexPath.row]
         cell.textLabel!.text = item.valueForKey("name") as String!
+        cell.detailTextLabel!.text = "Swipe right to move"
+        cell.defaultColor = UIColor.grayColor()
+        let checkView  = self.viewWithImageName("check")  as UIView
+        let deleteView = self.viewWithImageName("delete") as UIView
+        cell.setSwipeGestureWithView(checkView, color: UIColor.blueColor(), mode: MCSwipeTableViewCellMode.Exit, state: MCSwipeTableViewCellState.State1, completionBlock:{(cell: MCSwipeTableViewCell!, state: MCSwipeTableViewCellState, mode: MCSwipeTableViewCellMode) -> Void in
+        println("did Swipe to Move!")
+            self.moveItem(indexPath)
+        })
+        cell.setSwipeGestureWithView(deleteView, color: UIColor.redColor(), mode: MCSwipeTableViewCellMode.Exit, state: MCSwipeTableViewCellState.State3) { (cell: MCSwipeTableViewCell!, state: MCSwipeTableViewCellState, mode: MCSwipeTableViewCellMode) -> Void in
+            println("did Swipe to Delete!")
+            self.deleteObject(self.tableData, atIndexPath: indexPath)
+            self.tableData = self.fetchItems()!
+            self.groceryListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        }
         return cell
     }
     
@@ -97,27 +113,6 @@ class GroceryListViewController: CartsyViewController {
         } else {
             cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
         }
-    }
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        // this enabled swiping, because why the fuck not.
-    }
-    
-    // this is the editing actions, adds a More button. I don't know how to write code for them though.
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
-            self.deleteObject(self.tableData, atIndexPath: indexPath)
-            self.tableData = self.fetchItems()!
-            self.groceryListTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-        });
-        var moveRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Move", handler:{action, indexpath in
-            self.selectedRows.append(indexPath)
-            self.moveItem(indexPath)
-        });
-    
-        moveRowAction.backgroundColor = UIColor.blueColor()
-        
-        return [deleteRowAction, moveRowAction];
     }
     
 	
@@ -193,7 +188,7 @@ class GroceryListViewController: CartsyViewController {
             self.addChildViewController(moveToTableViewController)
             self.view.addSubview(moveToTableViewController.view)
             let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Done, target: self, action: "removeMoveView")
-            let doneButton   = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: "completedMove:")
+            let doneButton   = UIBarButtonItem(title: "Done",   style: UIBarButtonItemStyle.Done, target: self, action: "completedMove:")
             self.navigationItem.leftBarButtonItem  = cancelButton as UIBarButtonItem
             self.navigationItem.rightBarButtonItem = doneButton   as UIBarButtonItem
         })

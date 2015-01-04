@@ -181,6 +181,20 @@ class CartsyViewController: UIViewController, UITableViewDataSource, UITableView
         presentViewController(alert, animated: true, completion: nil)
     }
     
+//    - (UIView *)viewWithImageName:(NSString *)imageName {
+//    UIImage *image = [UIImage imageNamed:imageName];
+//    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+//    imageView.contentMode = UIViewContentModeCenter;
+//    return imageView;
+//    }
+    
+    func viewWithImageName(imageName: String) -> UIImageView {
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = UIViewContentMode.Center
+        return imageView
+    }
+    
     
     
     
