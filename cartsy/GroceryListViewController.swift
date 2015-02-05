@@ -69,11 +69,17 @@ class GroceryListViewController: CartsyViewController {
 	
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         println("number of rows in section: \(tableData.count)")
-        return tableData.count
+        return tableData.count + 1
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let cell: UITableViewCell = UITableViewCell(style: .Default, reuseIdentifier:  "ItemCell")
+        
+        if (indexPath.row == tableData.count) { // TODO this is where we make a 
+            let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "ItemCell")
+            cell.selectionStyle = UITableViewCellSelectionStyle.None;
+            return cell;
+        }
+        
         let cell = MCSwipeTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "ItemCell")
         cell.selectionStyle = UITableViewCellSelectionStyle.Blue
         let item = tableData[indexPath.row]
@@ -113,6 +119,10 @@ class GroceryListViewController: CartsyViewController {
         } else {
             cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
         }
+        if (indexPath.row == tableData.count) {
+            cell!.accessoryType = UITableViewCellAccessoryType.None
+        }
+            
     }
     
 	
